@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>if(!location.pathname.endsWith('/')&&!location.pathname.endsWith('.html')){var b=document.createElement('base');b.href=location.pathname+'/';document.head.appendChild(b);}</script>
+  <title>고교학점제 및 2022 개정 교육과정 — 과목 선택 상담 가이드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       1. RESET & CSS VARIABLES — Swiss International
+    ============================================================ */
+    :root {
+      --style-bg: #FFFFFF;
+      --style-primary: #111111;
+      --style-accent: #E8000D;
+      --style-text: #111111;
+      --style-text-secondary: #444444;
+      --style-divider: #DDDDDD;
+      --nav-height: 42px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ============================================================
+       2. ACCESSIBILITY
+    ============================================================ */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .skip-link {
+      position: absolute; top: -40px; left: 0;
+      background: var(--style-accent); color: #fff;
+      padding: 8px 16px; z-index: 9999; font-size: 14px;
+      font-family: Arial, Helvetica, sans-serif;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+    :focus-visible { outline: 3px solid var(--style-accent); outline-offset: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
+
+    /* ============================================================
+       3. BASE TYPOGRAPHY
+    ============================================================ */
+    html, body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: clamp(16px, 1.5vw, 28px);
+      background: var(--style-bg);
+      color: var(--style-text);
+      overflow: hidden; height: 100%;
+    }
+    h1 {
+      font-size: 2.4rem; font-weight: 800;
+      color: var(--style-primary); line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--style-primary); line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--style-primary); line-height: 1.3;
+    }
+    p { font-size: 1rem; color: var(--style-text-secondary); line-height: 1.65; }
+
+    /* ============================================================
+       4. PROGRESS BAR
+    ============================================================ */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: var(--style-accent);
+      transition: width 0.3s ease; z-index: 1000;
+    }
+
+    /* ============================================================
+       5. SLIDE CONTAINER
+    ============================================================ */
+    .presentation {
+      height: calc(100vh - var(--nav-height));
+      position: relative; overflow: hidden;
+    }
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0.8rem 1.2rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; }
+
+    /* ============================================================
+       6. BROWSER CARD — Minimal (Swiss International)
+    ============================================================ */
+    .browser-card {
+      width: 100%; max-width: 1200px;
+      max-height: calc(100vh - 4.8rem);
+      display: flex; flex-direction: column; overflow: hidden;
+      background: var(--style-bg);
+      border: 1px solid var(--style-divider);
+      border-left: 6px solid var(--style-accent);
+      box-shadow: 2px 2px 14px rgba(0,0,0,0.07);
+    }
+    .browser-card--frameless {
+      border: none !important; box-shadow: none !important;
+      background: transparent !important;
+    }
+    .browser-topbar {
+      display: flex; align-items: center;
+      padding: 0.42rem 1.2rem;
+      border-bottom: 1px solid var(--style-divider);
+      background: var(--style-bg);
+      flex-shrink: 0;
+    }
+    .topbar-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.12em;
+      color: var(--style-text-secondary);
+      text-transform: uppercase;
+      margin: 0 auto;
+    }
+    .browser-content {
+      flex: 1; overflow-y: auto;
+      padding: 1rem 2rem 0.8rem;
+    }
+
+    /* ============================================================
+       7. COMPONENTS — Section Header
+    ============================================================ */
+    .section-header {
+      margin-bottom: 0.55rem;
+      padding-bottom: 0.45rem;
+      border-bottom: 2px solid var(--style-accent);
+    }
+    .section-header h2 { display: flex; align-items: center; }
+    .section-icon {
+      display: inline;
+      font-size: 1.2em;
+      color: var(--style-accent);
+      margin-right: 0.4em;
+      vertical-align: -0.1em;
+    }
+    .section-subtitle {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem; color: var(--style-text-secondary);
+      letter-spacing: 0.06em; margin-top: 0.2rem;
+    }
+
+    /* ============================================================
+       8. COMPONENTS — Badge
+    ============================================================ */
+    .badge {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem; font-weight: 700;
+      padding: 0.15em 0.55em;
+      letter-spacing: 0.06em;
+    }
+    .badge-red { background: var(--style-accent); color: #fff; }
+    .badge-dark { background: var(--style-primary); color: #fff; }
+
+    /* ============================================================
+       9. COMPONENTS — Highlight Box
+    ============================================================ */
+    .highlight-box {
+      background: #f5f5f5;
+      border-left: 4px solid var(--style-accent);
+      padding: 0.65rem 1rem;
+      margin: 0.55rem 0;
+      font-size: 0.93rem; color: var(--style-text);
+      line-height: 1.6;
+    }
+    .highlight-box strong { color: var(--style-accent); }
+
+    /* ============================================================
+       10. COMPONENTS — Card Grid
+    ============================================================ */
+    .card-grid { display: grid; gap: 0.6rem; margin-top: 0.55rem; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+    .card {
+      background: #fafafa;
+      border: 1px solid var(--style-divider);
+      border-top: 3px solid var(--style-accent);
+      padding: 0.75rem 0.9rem;
+    }
+    .card-icon {
+      display: block; font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+      color: var(--style-accent);
+      font-weight: 700;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .card-title { font-size: 0.98rem; font-weight: 700; color: var(--style-primary); margin-bottom: 0.2rem; }
+    .card-desc { font-size: 0.86rem; color: var(--style-text-secondary); line-height: 1.5; }
+
+    /* Card stagger animation */
+    .slide.active .card { animation: fadeInUp 0.4s ease-out both; }
+    .slide.active .card:nth-child(2) { animation-delay: 0.07s; }
+    .slide.active .card:nth-child(3) { animation-delay: 0.14s; }
+    .slide.active .card:nth-child(4) { animation-delay: 0.21s; }
+    .slide.active .card:nth-child(5) { animation-delay: 0.28s; }
+    .slide.active .card:nth-child(6) { animation-delay: 0.35s; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       11. COMPONENTS — Cover
+    ============================================================ */
+    .cover-slide {
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      height: 100%; padding: 1.5rem 2.5rem;
+      position: relative;
+    }
+    .cover-year {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem; letter-spacing: 0.18em;
+      color: var(--style-accent); font-weight: 700;
+      text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    .cover-title {
+      font-size: 2.4rem; font-weight: 800;
+      color: var(--style-primary);
+      line-height: 1.15; margin-bottom: 0.4rem;
+    }
+    .cover-rule {
+      width: 64px; height: 4px;
+      background: var(--style-accent); margin: 0.75rem 0;
+    }
+    .cover-subtitle {
+      font-size: 1.1rem; color: var(--style-text-secondary);
+      line-height: 1.55; margin-bottom: 1rem; max-width: 620px;
+    }
+    .cover-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem; letter-spacing: 0.04em;
+      color: var(--style-text-secondary);
+      display: flex; gap: 1rem; align-items: center;
+      border-top: 1px solid var(--style-divider);
+      padding-top: 0.75rem; margin-top: 0.3rem;
+    }
+    .cover-meta--center {
+      justify-content: center; margin-top: 0.6rem;
+    }
+
+    /* ============================================================
+       12. COMPONENTS — TOC
+    ============================================================ */
+    .toc-list { list-style: none; margin-top: 0.4rem; }
+    .toc-item {
+      display: flex; align-items: center; gap: 0.8rem;
+      padding: 0.5rem 0.7rem;
+      border-bottom: 1px solid var(--style-divider);
+      cursor: pointer; transition: background 0.15s;
+    }
+    .toc-item:hover, .toc-item:focus { background: #f5f5f5; outline: none; }
+    .toc-item:hover .toc-num { background: var(--style-accent); color: #fff; border-color: var(--style-accent); }
+    .toc-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--style-accent); border: 1.5px solid var(--style-accent);
+      padding: 0.1em 0.4em; min-width: 2.2rem; text-align: center;
+      transition: all 0.15s;
+    }
+    .toc-text { font-size: 0.98rem; font-weight: 700; color: var(--style-primary); flex: 1; }
+    .toc-arrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem; color: var(--style-text-secondary);
+    }
+
+    /* ============================================================
+       13. COMPONENTS — Comparison Table
+    ============================================================ */
+    .table-wrapper { overflow-x: auto; margin-top: 0.55rem; }
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .comparison-table caption { display: none; }
+    .comparison-table thead tr { background: var(--style-primary); color: #fff; }
+    .comparison-table thead th {
+      padding: 0.55rem 0.75rem; font-weight: 700; text-align: left;
+      font-family: 'Space Mono', monospace; font-size: 0.78rem;
+      letter-spacing: 0.05em;
+    }
+    .comparison-table tbody tr:nth-child(even) { background: #f7f7f7; }
+    .comparison-table tbody td,
+    .comparison-table tbody th[scope="row"] {
+      padding: 0.48rem 0.75rem;
+      border-bottom: 1px solid var(--style-divider);
+      vertical-align: top; color: var(--style-text);
+    }
+    .comparison-table tbody th[scope="row"] {
+      font-weight: 700; color: var(--style-primary); white-space: nowrap;
+    }
+    .td-accent { color: var(--style-accent); font-weight: 700; }
+
+    /* ============================================================
+       14. COMPONENTS — Two Column
+    ============================================================ */
+    .two-col {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 0; margin-top: 0.55rem;
+    }
+    .col-divider { width: 1px; background: var(--style-divider); margin: 0 1.1rem; }
+    .col-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--style-accent); margin-bottom: 0.5rem;
+      border-bottom: 2px solid var(--style-accent); padding-bottom: 0.3rem;
+    }
+    .col-list { list-style: none; }
+    .col-list li {
+      padding: 0.38rem 0 0.38rem 1rem;
+      border-bottom: 1px solid var(--style-divider);
+      font-size: 0.9rem; color: var(--style-text);
+      position: relative; line-height: 1.45;
+    }
+    .col-list li::before {
+      content: ''; position: absolute; left: 0; top: 0.7em;
+      width: 5px; height: 5px; background: var(--style-accent);
+    }
+    .col-list li strong { color: var(--style-primary); font-weight: 700; }
+
+    /* ============================================================
+       15. COMPONENTS — Timeline
+    ============================================================ */
+    .timeline {
+      display: flex; gap: 0; margin-top: 0.55rem;
+      position: relative;
+    }
+    .timeline::before {
+      content: ''; position: absolute;
+      top: 26px; left: 20px; right: 20px; height: 2px;
+      background: var(--style-divider); z-index: 0;
+    }
+    .timeline-item {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      position: relative; z-index: 1; padding: 0 0.3rem;
+    }
+    .timeline-marker {
+      width: 13px; height: 13px;
+      border: 2px solid var(--style-accent);
+      background: var(--style-bg);
+      margin-bottom: 0.45rem;
+    }
+    .timeline-item.highlight .timeline-marker { background: var(--style-accent); }
+    .timeline-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--style-accent); letter-spacing: 0.04em;
+    }
+    .timeline-title {
+      font-size: 0.86rem; font-weight: 700;
+      color: var(--style-primary); margin-top: 0.18rem; line-height: 1.3;
+    }
+    .timeline-desc {
+      font-size: 0.8rem; color: var(--style-text-secondary);
+      margin-top: 0.12rem; line-height: 1.4;
+    }
+
+    /* ============================================================
+       16. COMPONENTS — Activity List
+    ============================================================ */
+    .activity-list { list-style: none; margin-top: 0.55rem; }
+    .activity-item {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      padding: 0.65rem 0.8rem;
+      border-bottom: 1px solid var(--style-divider);
+    }
+    .activity-icon {
+      font-size: 1.3rem; flex-shrink: 0; line-height: 1.5;
+      color: var(--style-accent); font-weight: 700;
+    }
+    .activity-body { flex: 1; }
+    .activity-title { font-size: 0.98rem; font-weight: 700; color: var(--style-primary); margin-bottom: 0.12rem; }
+    .activity-desc { font-size: 0.86rem; color: var(--style-text-secondary); line-height: 1.5; }
+
+    /* ============================================================
+       17. COMPONENTS — Task List
+    ============================================================ */
+    .task-list { list-style: none; margin-top: 0.45rem; }
+    .task-item {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      padding: 0.55rem 0.8rem;
+      border-left: 3px solid var(--style-accent);
+      margin-bottom: 0.45rem; background: #fafafa;
+    }
+    .task-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--style-accent); flex-shrink: 0; min-width: 2rem;
+    }
+    .task-body { flex: 1; }
+    .task-title { font-size: 0.98rem; font-weight: 700; color: var(--style-primary); margin-bottom: 0.1rem; }
+    .task-desc { font-size: 0.86rem; color: var(--style-text-secondary); line-height: 1.5; }
+
+    /* ============================================================
+       18. COMPONENTS — Stat Grid
+    ============================================================ */
+    .stat-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem; margin-top: 0.55rem;
+    }
+    .stat-item {
+      text-align: center; padding: 0.7rem 0.5rem;
+      border: 1px solid var(--style-divider);
+      border-top: 3px solid var(--style-accent);
+    }
+    .stat-number {
+      display: block; font-size: 2rem; font-weight: 800;
+      color: var(--style-accent); line-height: 1.1;
+    }
+    .stat-label {
+      display: block; font-family: 'Space Mono', monospace;
+      font-size: 0.78rem; color: var(--style-text-secondary);
+      letter-spacing: 0.04em; margin-top: 0.18rem;
+    }
+
+    /* ============================================================
+       19. COMPONENTS — End Slide
+    ============================================================ */
+    .end-slide { display: flex; flex-direction: column; justify-content: center; gap: 0.6rem; }
+    .end-header { text-align: center; }
+    .end-title { font-size: 2rem; font-weight: 800; color: var(--style-primary); margin-bottom: 0.25rem; }
+    .end-subtitle { font-size: 0.98rem; color: var(--style-text-secondary); }
+    .summary-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--style-accent); margin-bottom: 0.4rem;
+    }
+    .summary-list { list-style: none; }
+    .summary-list li {
+      font-size: 0.9rem; color: var(--style-text);
+      padding: 0.22rem 0; border-bottom: 1px solid var(--style-divider);
+      line-height: 1.5;
+    }
+    .summary-list li:last-child { border-bottom: none; }
+
+    /* ============================================================
+       20. NAVIGATION BAR
+    ============================================================ */
+    .nav-bar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem; padding: 0.35rem 1.5rem;
+      background: rgba(255,255,255,0.97);
+      border-top: 1px solid var(--style-divider);
+      z-index: 999; height: var(--nav-height);
+    }
+    .nav-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 1.8rem; height: 1.8rem;
+      border: 1.5px solid var(--style-divider); background: #fff;
+      cursor: pointer; font-size: 0; color: #444;
+      transition: all 0.2s; padding: 0; line-height: 1;
+    }
+    .nav-btn svg { width: 0.55rem; height: 0.55rem; fill: currentColor; display: block; }
+    .nav-btn:hover:not(:disabled) { border-color: var(--style-accent); background: var(--style-accent); }
+    .nav-btn:hover:not(:disabled) svg { fill: #fff; }
+    .nav-btn:focus-visible { outline: 3px solid var(--style-accent); outline-offset: 2px; }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .nav-counter {
+      font-size: 13px; font-weight: 700; color: #444;
+      min-width: 3rem; text-align: center;
+      display: flex; align-items: center; gap: 0.15rem; line-height: 1;
+      font-family: 'Space Mono', monospace;
+    }
+    .slide-input {
+      width: 1.4rem; text-align: center; border: none;
+      border-bottom: 1.5px solid transparent;
+      background: transparent; font-size: 13px; font-weight: 700;
+      color: inherit; font-family: inherit; padding: 0; outline: none;
+      cursor: pointer; transition: border-color 0.2s; line-height: 1;
+    }
+    .slide-input:hover { border-bottom-color: var(--style-accent); }
+    .slide-input:focus { border-bottom-color: var(--style-accent); background: #f5f5f5; }
+
+    /* ============================================================
+       21. RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      html, body { font-size: clamp(15px, 2vw, 22px); }
+    }
+    @media (max-width: 768px) {
+      html, body { font-size: clamp(14px, 3vw, 20px); }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      .col-divider { display: none; }
+      .timeline { flex-direction: column; align-items: flex-start; }
+      .timeline::before { display: none; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      html, body { font-size: clamp(14px, 3.5vw, 18px); }
+      .nav-btn { width: 1.5rem; height: 1.5rem; }
+      .browser-content { padding: 0.8rem 1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    @media (prefers-contrast: high) {
+      .browser-card { border: 2px solid #000; }
+      .badge, .highlight-box { border: 2px solid currentColor; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#presentation" class="skip-link">본문으로 바로가기</a>
+  <div class="progress-bar" id="progressBar" role="progressbar"
+       aria-valuenow="1" aria-valuemin="1" aria-valuemax="13"
+       aria-label="프레젠테이션 진행률"></div>
+
+  <div class="presentation" id="presentation" role="main">
+
+    <!-- ========== SLIDE 1: COVER ========== -->
+    <div class="slide active" data-slide="0" role="region" aria-label="슬라이드 1: 표지">
+      <div class="browser-card browser-card--frameless">
+        <div class="browser-topbar">
+          <span class="topbar-title">2026학년도 교사 연수 자료</span>
+        </div>
+        <div class="browser-content cover-slide">
+          <div class="cover-year">Teacher Training — 2026</div>
+          <h1 class="cover-title">고교학점제 &amp;<br>2022 개정 교육과정</h1>
+          <div class="cover-rule" aria-hidden="true"></div>
+          <p class="cover-subtitle">과목 선택 상담 가이드 — 학생 진로와 연계한 체계적 과목 선택 지원 방법</p>
+          <div class="cover-meta">
+            <span>○○고등학교 교무부</span>
+            <span aria-hidden="true">·</span>
+            <time datetime="2026-03">2026년 3월</time>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 2: TOC ========== -->
+    <div class="slide" data-slide="1" role="region" aria-label="슬라이드 2: 목차">
+      <div class="browser-card">
+        <div class="browser-topbar"><span class="topbar-title">목차 — Contents</span></div>
+        <div class="browser-content">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 목차</h2>
+            <p class="section-subtitle">오늘 다룰 7가지 주제</p>
+          </div>
+          <nav aria-label="슬라이드 목차">
+            <ol class="toc-list">
+              <li class="toc-item" role="button" tabindex="0" data-target="2" aria-label="슬라이드 3으로 이동: 고교학점제 개요">
+                <span class="toc-num" aria-hidden="true">01</span>
+                <span class="toc-text">고교학점제 개요</span>
+                <span class="toc-arrow" aria-hidden="true">→</span>
+              </li>
+              <li class="toc-item" role="button" tabindex="0" data-target="3" aria-label="슬라이드 4로 이동: 이수 학점 구조">
+                <span class="toc-num" aria-hidden="true">02</span>
+                <span class="toc-text">이수 학점 구조</span>
+                <span class="toc-arrow" aria-hidden="true">→</span>
+              </li>
+              <li class="toc-item" role="button" tabindex="0" data-target="4" aria-label="슬라이드 5로 이동: 2022 개정 교육과정 핵심 변화">
+                <span class="toc-num" aria-hidden="true">03</span>
+                <span class="toc-text">2022 개정 교육과정 핵심 변화</span>
+                <span class="toc-arrow" aria-hidden="true">→</span>
+              </li>
+              <li class="toc-item" role="button" tabindex="0" data-target="6" aria-label="슬라이드 7로 이동: 선택 과목 체계">
+                <span class="toc-num" aria-hidden="true">04</span>
+                <span class="toc-text">선택 과목 체계</span>
+                <span class="toc-arrow" aria-hidden="true">→</span>
+              </li>
+              <li class="toc-item" role="button" tabindex="0" data-target="8" aria-label="슬라이드 9로 이동: 과목 선택 상담 절차">
+                <span class="toc-num" aria-hidden="true">05</span>
+                <span class="toc-text">과목 선택 상담 절차</span>
+                <span class="toc-arrow" aria-hidden="true">→</span>
+              </li>
+              <li class="toc-item" role="button" tabindex="0" data-target="10" aria-label="슬라이드 11로 이동: 주요 일정">
+                <span class="toc-num" aria-hidden="true">06</span>
+                <span class="toc-text">주요 일정</span>
+                <span class="toc-arrow" aria-hidden="true">→</span>
+              </li>
+              <li class="toc-item" role="button" tabindex="0" data-target="11" aria-label="슬라이드 12로 이동: 자주 묻는 질문">
+                <span class="toc-num" aria-hidden="true">07</span>
+                <span class="toc-text">자주 묻는 질문 (FAQ)</span>
+                <span class="toc-arrow" aria-hidden="true">→</span>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 3: 고교학점제 개요 ========== -->
+    <div class="slide" data-slide="2" role="region" aria-label="슬라이드 3: 고교학점제 개요">
+      <div class="browser-card">
+        <div class="browser-topbar"><span class="topbar-title">01 / 고교학점제 개요</span></div>
+        <div class="browser-content">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 고교학점제란?</h2>
+            <p class="section-subtitle">High School Credit System — 2025년 전면 시행</p>
+          </div>
+          <div class="highlight-box" role="note">
+            학생이 <strong>진로에 따라 다양한 과목을 선택·이수</strong>하고, 누적 학점이 기준(192학점)에 도달할 경우 졸업을 인정받는 제도입니다.
+          </div>
+          <div class="card-grid grid-2" role="list">
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">◉</span>
+              <h3 class="card-title">학점 기반 졸업</h3>
+              <p class="card-desc">3년간 192학점 이수 시 졸업 인정. 학기당 이수 학점 상한 적용.</p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">◉</span>
+              <h3 class="card-title">학생 과목 선택권</h3>
+              <p class="card-desc">공통과목 외 일반·융합·진로 선택과목을 학생이 직접 선택하여 이수.</p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">◉</span>
+              <h3 class="card-title">최소 성취수준 보장</h3>
+              <p class="card-desc">미도달 학생에게 보충 학습 지원 제공 — 이수·미이수제 도입.</p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">◉</span>
+              <h3 class="card-title">성취평가제 확대</h3>
+              <p class="card-desc">선택과목(진로·융합)은 A~E 성취도로 기록. 절대평가 방식 적용.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 4: 이수 학점 구조 ========== -->
+    <div class="slide" data-slide="3" role="region" aria-label="슬라이드 4: 이수 학점 구조">
+      <div class="browser-card">
+        <div class="browser-topbar"><span class="topbar-title">02 / 이수 학점 구조</span></div>
+        <div class="browser-content">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 이수 학점 구조</h2>
+            <p class="section-subtitle">총 192학점 — 공통·선택·자율 이수 구성</p>
+          </div>
+          <div class="stat-grid" role="list">
+            <div class="stat-item" role="listitem">
+              <span class="stat-number" aria-label="192학점">192</span>
+              <span class="stat-label">졸업 이수 학점</span>
+            </div>
+            <div class="stat-item" role="listitem">
+              <span class="stat-number" aria-label="84학점">84</span>
+              <span class="stat-label">공통과목 이수 학점</span>
+            </div>
+            <div class="stat-item" role="listitem">
+              <span class="stat-number" aria-label="108학점">108</span>
+              <span class="stat-label">선택과목 이수 학점</span>
+            </div>
+          </div>
+          <div class="table-wrapper" role="region" aria-label="학점 구조 비교표" tabindex="0">
+            <table class="comparison-table">
+              <caption class="sr-only">고교학점제 과목 유형별 이수 구조</caption>
+              <thead>
+                <tr>
+                  <th scope="col">구분</th>
+                  <th scope="col">과목 유형</th>
+                  <th scope="col">학점</th>
+                  <th scope="col">평가 방식</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" rowspan="2">공통과목</th>
+                  <td>공통국어Ⅰ·Ⅱ, 공통수학Ⅰ·Ⅱ</td>
+                  <td>각 4학점</td>
+                  <td>상대평가 (9등급)</td>
+                </tr>
+                <tr>
+                  <td>통합사회Ⅰ·Ⅱ, 통합과학Ⅰ·Ⅱ</td>
+                  <td>각 4학점</td>
+                  <td>상대평가 (9등급)</td>
+                </tr>
+                <tr>
+                  <th scope="row">일반 선택</th>
+                  <td>교과별 일반 선택과목</td>
+                  <td>4학점</td>
+                  <td>상대평가 (9등급)</td>
+                </tr>
+                <tr>
+                  <th scope="row">진로 선택</th>
+                  <td>심화국어, 물리학Ⅱ, 고급수학 등</td>
+                  <td>4학점</td>
+                  <td class="td-accent">성취평가 (A~E)</td>
+                </tr>
+                <tr>
+                  <th scope="row">융합 선택</th>
+                  <td>삶과 문화, 기후변화와 지속가능한 세계 등</td>
+                  <td>2학점</td>
+                  <td class="td-accent">성취평가 (A~E)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 5: 2015 vs 2022 비교 ========== -->
+    <div class="slide" data-slide="4" role="region" aria-label="슬라이드 5: 2022 개정 교육과정 핵심 변화">
+      <div class="browser-card">
+        <div class="browser-topbar"><span class="topbar-title">03 / 2022 개정 교육과정</span></div>
+        <div class="browser-content">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 2015 개정 vs 2022 개정 비교</h2>
+            <p class="section-subtitle">2025학년도 고1부터 2022 개정 교육과정 전면 적용</p>
+          </div>
+          <div class="two-col">
+            <div class="col-left">
+              <h3 class="col-title">2015 개정 (구 교육과정)</h3>
+              <ul class="col-list" role="list">
+                <li role="listitem">과목 이수 단위 중심 (1단위=50분×17회)</li>
+                <li role="listitem">졸업 204단위 이수</li>
+                <li role="listitem">진로 선택과목 3개 이상 이수</li>
+                <li role="listitem">학기당 이수 과목 수 제한 없음</li>
+              </ul>
+            </div>
+            <div class="col-divider" aria-hidden="true"></div>
+            <div class="col-right">
+              <h3 class="col-title">2022 개정 (신 교육과정)</h3>
+              <ul class="col-list" role="list">
+                <li role="listitem"><strong>학점제 기반</strong> — 1학점=50분×16회</li>
+                <li role="listitem"><strong>졸업 192학점</strong> 이수</li>
+                <li role="listitem">일반·진로·융합 선택과목 다양화</li>
+                <li role="listitem">학기당 이수 학점 상한 적용</li>
+              </ul>
+            </div>
+          </div>
+          <div class="highlight-box" role="note">
+            <strong>이수·미이수제 신규 도입</strong> — 출석률 2/3 미만 또는 성취도 E 미만 시 미이수 처리. 담임 교사의 사전 개입이 중요합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 6: 주요 변화 6가지 ========== -->
+    <div class="slide" data-slide="5" role="region" aria-label="슬라이드 6: 주요 변화 6가지">
+      <div class="browser-card">
+        <div class="browser-topbar"><span class="topbar-title">03 / 2022 개정 주요 변화</span></div>
+        <div class="browser-content">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 교사가 반드시 알아야 할 6가지 변화</h2>
+            <p class="section-subtitle">상담 및 교육과정 운영에 직접 영향을 미치는 핵심 변경 사항</p>
+          </div>
+          <div class="card-grid grid-3" role="list">
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">①</span>
+              <h3 class="card-title">이수·미이수제</h3>
+              <p class="card-desc">출석률 2/3 미만 또는 성취도 E 이하 → 미이수 처리</p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">②</span>
+              <h3 class="card-title">공통과목 세분화</h3>
+              <p class="card-desc">공통국어Ⅰ·Ⅱ, 공통수학Ⅰ·Ⅱ로 분리 운영</p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">③</span>
+              <h3 class="card-title">융합 선택과목 신설</h3>
+              <p class="card-desc">삶과 문화, 역사로 탐구하는 현대 세계 등 주제 중심 신설</p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">④</span>
+              <h3 class="card-title">학생 선택 중심 강화</h3>
+              <p class="card-desc">2학년부터 학생 맞춤형 과목 편성 비중 대폭 확대</p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">⑤</span>
+              <h3 class="card-title">진로 연계 학기</h3>
+              <p class="card-desc">고3 2학기 — 진로·학업 설계 중심으로 운영</p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">⑥</span>
+              <h3 class="card-title">디지털 기초 소양</h3>
+              <p class="card-desc">정보 교과 34학점 편성 강화, AI 기초 과목 신설</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 7: 선택 과목 체계 ========== -->
+    <div class="slide" data-slide="6" role="region" aria-label="슬라이드 7: 선택 과목 체계">
+      <div class="browser-card">
+        <div class="browser-topbar"><span class="topbar-title">04 / 선택 과목 체계</span></div>
+        <div class="browser-content">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 선택 과목 3가지 유형</h2>
+            <p class="section-subtitle">일반 선택 / 진로 선택 / 융합 선택 — 상담 시 핵심 구분</p>
+          </div>
+          <div class="table-wrapper" role="region" aria-label="선택 과목 유형별 비교표" tabindex="0">
+            <table class="comparison-table">
+              <caption class="sr-only">선택 과목 3가지 유형 비교</caption>
+              <thead>
+                <tr>
+                  <th scope="col">유형</th>
+                  <th scope="col">성격</th>
+                  <th scope="col">평가</th>
+                  <th scope="col">예시 과목</th>
+                  <th scope="col">상담 포인트</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">일반 선택</th>
+                  <td>교과 역량 함양</td>
+                  <td>9등급 상대평가</td>
+                  <td>화학Ⅰ, 경제, 문학 등</td>
+                  <td>수능 연계 과목 우선 배치</td>
+                </tr>
+                <tr>
+                  <th scope="row">진로 선택</th>
+                  <td>심화·전문 탐구</td>
+                  <td class="td-accent">A~E 성취평가</td>
+                  <td>물리학Ⅱ, 심화국어, 고급수학 등</td>
+                  <td>희망 전공 연계 선택 권장</td>
+                </tr>
+                <tr>
+                  <th scope="row">융합 선택</th>
+                  <td>주제 중심 융합</td>
+                  <td class="td-accent">A~E 성취평가</td>
+                  <td>삶과 문화, 기후변화와 지속가능한 세계</td>
+                  <td>진로 탐색 단계 학생에 적합</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="highlight-box" role="note">
+            <strong>수능 응시 과목</strong>과 <strong>대입 전형 필수 이수 과목</strong>을 반드시 함께 안내하세요. 특히 의·약학·사범·공대 지원 시 필수 이수 과목을 사전에 확인해야 합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 8: 진로별 과목 선택 경로 ========== -->
+    <div class="slide" data-slide="7" role="region" aria-label="슬라이드 8: 진로별 과목 선택 경로">
+      <div class="browser-card">
+        <div class="browser-topbar"><span class="topbar-title">04 / 진로별 과목 선택 경로</span></div>
+        <div class="browser-content">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 진로 계열별 권장 과목 경로</h2>
+            <p class="section-subtitle">담임 상담 시 활용 — 계열별 핵심 선택 과목 안내</p>
+          </div>
+          <ul class="activity-list" role="list">
+            <li class="activity-item" role="listitem">
+              <span class="activity-icon" aria-hidden="true">◈</span>
+              <div class="activity-body">
+                <h3 class="activity-title">이공계 / 의약학 계열</h3>
+                <p class="activity-desc">수학Ⅱ → 미적분 → 기하 / 화학Ⅰ → 화학Ⅱ → 생명과학Ⅱ. 영어독해와 작문 권장. <strong>수능 과목(수학, 과학탐구) 반드시 포함.</strong></p>
+              </div>
+            </li>
+            <li class="activity-item" role="listitem">
+              <span class="activity-icon" aria-hidden="true">◈</span>
+              <div class="activity-body">
+                <h3 class="activity-title">인문 / 사회과학 계열</h3>
+                <p class="activity-desc">문학 → 심화국어 / 한국사 → 동아시아사 → 사회·문화. 경제·정치와 법 권장. <strong>수능 사회탐구 선택 과목과 연계.</strong></p>
+              </div>
+            </li>
+            <li class="activity-item" role="listitem">
+              <span class="activity-icon" aria-hidden="true">◈</span>
+              <div class="activity-body">
+                <h3 class="activity-title">예술 / 체육 계열</h3>
+                <p class="activity-desc">음악·미술·체육 관련 전문 선택과목 + 일반 교과 기초 이수. <strong>포트폴리오 연계 과목 구성 권장.</strong> 실기 능력 중심 대입 전형 고려.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 9: 과목 선택 상담 절차 ========== -->
+    <div class="slide" data-slide="8" role="region" aria-label="슬라이드 9: 과목 선택 상담 절차">
+      <div class="browser-card">
+        <div class="browser-topbar"><span class="topbar-title">05 / 과목 선택 상담 절차</span></div>
+        <div class="browser-content">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 4단계 상담 절차</h2>
+            <p class="section-subtitle">담임 교사의 체계적 과목 선택 상담 가이드</p>
+          </div>
+          <ol class="task-list" role="list">
+            <li class="task-item" role="listitem">
+              <span class="task-num" aria-hidden="true">01</span>
+              <div class="task-body">
+                <h3 class="task-title">진로 탐색 확인</h3>
+                <p class="task-desc">학생의 희망 진로·전공 파악. 커리어패스 검사 결과 및 진로활동 이력 사전 확인. 막연한 학생은 계열 수준으로 설정.</p>
+              </div>
+            </li>
+            <li class="task-item" role="listitem">
+              <span class="task-num" aria-hidden="true">02</span>
+              <div class="task-body">
+                <h3 class="task-title">수능 · 대입 전형 안내</h3>
+                <p class="task-desc">지원 희망 대학·학과의 필수 이수 과목 및 수능 응시 영역 함께 확인. 교과 전형 vs 종합 전형 차이 및 영향 설명.</p>
+              </div>
+            </li>
+            <li class="task-item" role="listitem">
+              <span class="task-num" aria-hidden="true">03</span>
+              <div class="task-body">
+                <h3 class="task-title">과목 포트폴리오 설계</h3>
+                <p class="task-desc">학기별 이수 계획서 작성 지원. 학점 상한 준수 여부 확인. 이수·미이수제 관련 부담 과목 사전 조율.</p>
+              </div>
+            </li>
+            <li class="task-item" role="listitem">
+              <span class="task-num" aria-hidden="true">04</span>
+              <div class="task-body">
+                <h3 class="task-title">추후 관리 및 재상담</h3>
+                <p class="task-desc">1학기 성적 확인 후 2학기 과목 조정. 미이수 위험 학생 조기 발굴 및 보충 학습 지원 연계.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 10: 상담 체크리스트 ========== -->
+    <div class="slide" data-slide="9" role="region" aria-label="슬라이드 10: 상담 체크리스트">
+      <div class="browser-card">
+        <div class="browser-topbar"><span class="topbar-title">05 / 상담 체크리스트</span></div>
+        <div class="browser-content">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 상담 전 확인 체크리스트</h2>
+            <p class="section-subtitle">교사 준비 사항 vs 학생 준비 사항</p>
+          </div>
+          <div class="two-col">
+            <div class="col-left">
+              <h3 class="col-title">교사 준비 사항</h3>
+              <ul class="col-list" role="list">
+                <li role="listitem">학교 개설 과목 목록 및 시간표 확인</li>
+                <li role="listitem">대학별 전공 필수 이수 과목 리스트 준비</li>
+                <li role="listitem">학생별 성적·출결 현황 사전 파악</li>
+                <li role="listitem">이수·미이수 기준 및 보충 프로그램 안내</li>
+              </ul>
+            </div>
+            <div class="col-divider" aria-hidden="true"></div>
+            <div class="col-right">
+              <h3 class="col-title">학생 준비 사항</h3>
+              <ul class="col-list" role="list">
+                <li role="listitem">희망 대학·학과 3개 이상 사전 조사</li>
+                <li role="listitem">커리어패스 진로 검사 완료</li>
+                <li role="listitem">학기별 이수 희망 과목 초안 작성</li>
+                <li role="listitem">선배 과목 선택 정보 사전 참고</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 11: 주요 일정 ========== -->
+    <div class="slide" data-slide="10" role="region" aria-label="슬라이드 11: 주요 일정">
+      <div class="browser-card">
+        <div class="browser-topbar"><span class="topbar-title">06 / 주요 일정</span></div>
+        <div class="browser-content">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 과목 선택 주요 일정</h2>
+            <p class="section-subtitle">2026학년도 기준 — 학교별 일정 사전 확인 필수</p>
+          </div>
+          <div class="timeline" role="list" aria-label="과목 선택 주요 일정">
+            <div class="timeline-item" role="listitem">
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <span class="timeline-date"><time datetime="2026-02">2월</time></span>
+              <h3 class="timeline-title">과목 안내 자료 배포</h3>
+              <p class="timeline-desc">개설 과목 목록 및 안내문 발송</p>
+            </div>
+            <div class="timeline-item highlight" role="listitem">
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <span class="timeline-date"><time datetime="2026-03">3월</time></span>
+              <h3 class="timeline-title">1차 상담 기간 <span class="badge badge-red">중요</span></h3>
+              <p class="timeline-desc">전 학생 담임 상담 완료</p>
+            </div>
+            <div class="timeline-item" role="listitem">
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <span class="timeline-date"><time datetime="2026-04">4월</time></span>
+              <h3 class="timeline-title">과목 수요 조사</h3>
+              <p class="timeline-desc">희망 과목 취합 및 편성 검토</p>
+            </div>
+            <div class="timeline-item highlight" role="listitem">
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <span class="timeline-date"><time datetime="2026-05">5월</time></span>
+              <h3 class="timeline-title">과목 선택 확정 <span class="badge badge-red">마감</span></h3>
+              <p class="timeline-desc">최종 과목 선택 제출 및 이수 계획 확정</p>
+            </div>
+            <div class="timeline-item" role="listitem">
+              <div class="timeline-marker" aria-hidden="true"></div>
+              <span class="timeline-date"><time datetime="2026-06">6월</time></span>
+              <h3 class="timeline-title">시간표 편성 완료</h3>
+              <p class="timeline-desc">2학기 수업 시간표 확정 발표</p>
+            </div>
+          </div>
+          <div class="highlight-box" role="note">
+            <strong>학교별 일정은 상이할 수 있습니다.</strong> 반드시 학교 학사일정을 사전에 확인하고, 담임 공지를 통해 학생·학부모에게 안내하세요.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 12: FAQ ========== -->
+    <div class="slide" data-slide="11" role="region" aria-label="슬라이드 12: 자주 묻는 질문">
+      <div class="browser-card">
+        <div class="browser-topbar"><span class="topbar-title">07 / 자주 묻는 질문 (FAQ)</span></div>
+        <div class="browser-content">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 자주 묻는 질문 (FAQ)</h2>
+            <p class="section-subtitle">학생·학부모 상담 시 빈번히 나오는 질문</p>
+          </div>
+          <div class="card-grid grid-2" role="list">
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">◉</span>
+              <h3 class="card-title">수능 과목과 학교 개설 과목이 다르면?</h3>
+              <p class="card-desc">공동교육과정 또는 온라인학교를 통해 수능 필수 과목을 별도 이수할 수 있습니다.</p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">◉</span>
+              <h3 class="card-title">진로 선택과목은 내신에 불리한가요?</h3>
+              <p class="card-desc">A~E 성취평가로 기록되어 9등급 상대평가가 없습니다. 종합전형에서는 도전적 과목 선택이 긍정적 요소입니다.</p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">◉</span>
+              <h3 class="card-title">미이수가 되면 졸업이 불가한가요?</h3>
+              <p class="card-desc">미이수 과목 발생 시 보충 이수 기회 제공 후 이수 전환 가능합니다. 단, 누적 학점 부족 시 졸업 유예될 수 있습니다.</p>
+            </div>
+            <div class="card" role="listitem">
+              <span class="card-icon" aria-hidden="true">◉</span>
+              <h3 class="card-title">과목 선택을 변경하고 싶으면?</h3>
+              <p class="card-desc">학교별 과목 변경 신청 기간 내 담임 교사에게 신청합니다. 정원 초과 과목은 변경이 제한될 수 있습니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 13: END ========== -->
+    <div class="slide" data-slide="12" role="region" aria-label="슬라이드 13: 마무리">
+      <div class="browser-card">
+        <div class="browser-topbar"><span class="topbar-title">마무리</span></div>
+        <div class="browser-content end-slide">
+          <div class="end-header">
+            <h2 class="end-title">감사합니다</h2>
+            <p class="end-subtitle">궁금한 점이 있으시면 언제든지 질문해 주세요.</p>
+          </div>
+          <div class="highlight-box" role="complementary" aria-label="핵심 요약">
+            <p class="summary-title">오늘의 핵심 요약</p>
+            <ul class="summary-list" role="list">
+              <li role="listitem">✦ 2025학년도부터 192학점 고교학점제 전면 시행 — 이수·미이수제 도입</li>
+              <li role="listitem">✦ 일반·진로·융합 선택과목 체계 이해 후 학생 진로와 연계한 상담 진행</li>
+              <li role="listitem">✦ 수능 응시 과목 및 대입 전형 필수 이수 과목을 함께 안내</li>
+              <li role="listitem">✦ 5월 과목 선택 확정 마감 전 전 학생 상담 완료</li>
+            </ul>
+          </div>
+          <div class="cover-meta cover-meta--center">
+            <span>교무부 교육과정 담당 교사</span>
+            <span aria-hidden="true">·</span>
+            <span>내선 ○○○○</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.presentation -->
+
+  <div id="slideAnnounce" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+  <nav class="nav-bar" aria-label="슬라이드 네비게이션">
+    <button class="nav-btn" id="prevBtn" disabled aria-label="이전 슬라이드">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+    </button>
+    <span class="nav-counter" aria-label="슬라이드 위치">
+      <input type="text" class="slide-input" id="slideInput" value="1"
+             aria-label="슬라이드 번호 입력 (Enter로 이동)"
+             inputmode="numeric" pattern="[0-9]*">
+      / <span id="totalSlidesDisplay" aria-hidden="true">13</span>
+    </span>
+    <button class="nav-btn" id="nextBtn" aria-label="다음 슬라이드">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+      </svg>
+    </button>
+  </nav>
+
+  <script>
+    (function () {
+      const slides = document.querySelectorAll('.slide');
+      const TOTAL = slides.length;
+      let cur = 0;
+
+      const prevBtn   = document.getElementById('prevBtn');
+      const nextBtn   = document.getElementById('nextBtn');
+      const slideInput = document.getElementById('slideInput');
+      const progressBar = document.getElementById('progressBar');
+      const announceEl = document.getElementById('slideAnnounce');
+
+      document.getElementById('totalSlidesDisplay').textContent = TOTAL;
+
+      function updateNav() {
+        prevBtn.disabled = cur === 0;
+        nextBtn.disabled = cur === TOTAL - 1;
+        slideInput.value = cur + 1;
+        progressBar.style.width = ((cur + 1) / TOTAL * 100) + '%';
+        progressBar.setAttribute('aria-valuenow', cur + 1);
+        if (announceEl) announceEl.textContent = '슬라이드 ' + (cur + 1) + ' / ' + TOTAL;
+      }
+
+      function goToSlide(idx) {
+        if (idx < 0 || idx >= TOTAL) return;
+        slides[cur].classList.remove('active');
+        cur = idx;
+        slides[cur].classList.add('active');
+        updateNav();
+      }
+
+      function next() { if (cur < TOTAL - 1) goToSlide(cur + 1); }
+      function prev() { if (cur > 0) goToSlide(cur - 1); }
+
+      prevBtn.addEventListener('click', prev);
+      nextBtn.addEventListener('click', next);
+
+      /* TOC click */
+      document.querySelectorAll('.toc-item').forEach(function(item) {
+        var target = parseInt(item.getAttribute('data-target'), 10);
+        item.addEventListener('click', function() { goToSlide(target); });
+        item.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goToSlide(target); }
+        });
+      });
+
+      /* Keyboard */
+      document.addEventListener('keydown', function(e) {
+        if (e.target === slideInput) return;
+        if (['ArrowRight','ArrowDown',' ','PageDown'].indexOf(e.key) !== -1) {
+          e.preventDefault(); next();
+        } else if (['ArrowLeft','ArrowUp','PageUp'].indexOf(e.key) !== -1) {
+          e.preventDefault(); prev();
+        } else if (e.key === 'Home') { e.preventDefault(); goToSlide(0); }
+          else if (e.key === 'End')  { e.preventDefault(); goToSlide(TOTAL - 1); }
+      });
+
+      /* Mouse wheel */
+      var wheelLocked = false;
+      document.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        if (wheelLocked) return;
+        wheelLocked = true;
+        if (e.deltaY > 0) next(); else if (e.deltaY < 0) prev();
+        setTimeout(function() { wheelLocked = false; }, 600);
+      }, { passive: false });
+
+      /* Touch swipe */
+      var touchX = 0;
+      document.addEventListener('touchstart', function(e) {
+        touchX = e.touches[0].clientX;
+      }, { passive: true });
+      document.addEventListener('touchend', function(e) {
+        var dx = touchX - e.changedTouches[0].clientX;
+        if (Math.abs(dx) > 50) { if (dx > 0) next(); else prev(); }
+      }, { passive: true });
+
+      /* Slide number input */
+      slideInput.addEventListener('focus', function() { slideInput.select(); });
+      slideInput.addEventListener('keydown', function(e) {
+        e.stopPropagation();
+        if (e.key === 'Enter') {
+          var n = parseInt(slideInput.value, 10);
+          if (!isNaN(n) && n >= 1 && n <= TOTAL) goToSlide(n - 1);
+          else slideInput.value = cur + 1;
+          slideInput.blur();
+        } else if (e.key === 'Escape') {
+          slideInput.value = cur + 1;
+          slideInput.blur();
+        }
+      });
+      slideInput.addEventListener('blur', function() {
+        var n = parseInt(slideInput.value, 10);
+        if (!isNaN(n) && n >= 1 && n <= TOTAL) goToSlide(n - 1);
+        else slideInput.value = cur + 1;
+      });
+
+      updateNav();
+    })();
+  </script>
+</body>
+</html>

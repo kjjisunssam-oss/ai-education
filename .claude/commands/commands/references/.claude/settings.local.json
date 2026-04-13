@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /e/presentation/.claude/backup)",
+      "Bash(cp /e/presentation/.claude/SKILL.md /e/presentation/.claude/backup/SKILL.md.bak)",
+      "Bash(cp \"/c/Users/chani/.claude/commands/presentation-builder.md\" /e/presentation/.claude/backup/command-presentation-builder.md.bak)",
+      "Bash(cp /e/presentation/.agents/workflows/presentation-builder.md /e/presentation/.claude/backup/workflow-presentation-builder.md.bak)",
+      "Bash(rm \"/c/Users/chani/.claude/commands/presentation-builder.md\")",
+      "Bash(rm \"/e/presentation/.agents/workflows/presentation-builder.md\")"
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "tool_name": "Read",
+  "tool_input_preview": "{\"file_path\":\"E:\\\\presentation\\\\.claude\\\\references\\\\styles.md\"}",
+  "error": "File content (13559 tokens) exceeds maximum allowed tokens (10000). Use offset and limit parameters to read specific portions of the file, or search for specific content instead of reading the whole file.",
+  "timestamp": "2026-03-21T13:51:11.332Z",
+  "retry_count": 3
+}

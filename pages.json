@@ -1,0 +1,23 @@
+{
+  "subjects": [
+    {
+      "name": "교육과정",
+      "icon": "📋",
+      "pages": [
+        {
+          "title": "고교학점제 및 2022 개정 교육과정 — 과목 선택 상담 가이드",
+          "path": "교육과정/고교학점제-과목선택상담/index.html",
+          "emoji": "📋",
+          "description": "교사 대상 연수 자료. 고교학점제 개요, 2022 개정 교육과정 핵심 변화, 과목 선택 상담 절차 및 주요 일정 안내.",
+          "tags": [
+            { "label": "고교학점제", "color": "blue" },
+            { "label": "2022 개정", "color": "green" },
+            { "label": "교사 연수", "color": "purple" },
+            { "label": "과목 선택", "color": "orange" }
+          ],
+          "gradient": "linear-gradient(90deg, #E8000D, #111111)"
+        }
+      ]
+    }
+  ]
+}
