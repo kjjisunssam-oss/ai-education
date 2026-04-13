@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수업 자료 대시보드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f5f7;
+      --surface: #ffffff;
+      --border: #e4e6ea;
+      --text: #1a1d23;
+      --text-secondary: #5c6170;
+      --accent: #3b5bdb;
+      --accent-light: #eef2ff;
+      --tag-blue: #1971c2;   --tag-blue-bg: #dbe4ff;
+      --tag-green: #2f9e44;  --tag-green-bg: #d3f9d8;
+      --tag-purple: #7048e8; --tag-purple-bg: #e5dbff;
+      --tag-orange: #d9480f; --tag-orange-bg: #ffe8cc;
+      --radius: 12px;
+      --shadow: 0 2px 8px rgba(0,0,0,0.07), 0 0 1px rgba(0,0,0,0.08);
+      --shadow-hover: 0 8px 24px rgba(0,0,0,0.12), 0 0 1px rgba(0,0,0,0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 1rem;
+      height: 60px;
+    }
+    .site-title {
+      font-size: 1.05rem; font-weight: 900;
+      color: var(--text); letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    .site-title span { color: var(--accent); }
+    .header-search {
+      flex: 1; max-width: 360px; margin-left: auto;
+      position: relative;
+    }
+    .header-search input {
+      width: 100%;
+      padding: 0.45rem 0.9rem 0.45rem 2.2rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.875rem; color: var(--text);
+      background: var(--bg);
+      outline: none; transition: border-color 0.15s;
+    }
+    .header-search input:focus { border-color: var(--accent); background: #fff; }
+    .header-search input::placeholder { color: var(--text-secondary); }
+    .search-icon {
+      position: absolute; left: 0.65rem; top: 50%;
+      transform: translateY(-50%);
+      width: 14px; height: 14px;
+      fill: var(--text-secondary); pointer-events: none;
+    }
+    .total-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem; color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: 1200px; margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+    }
+
+    /* ── FILTER TABS ── */
+    .filter-bar {
+      display: flex; gap: 0.4rem; flex-wrap: wrap;
+      margin-bottom: 1.8rem;
+    }
+    .filter-btn {
+      padding: 0.38rem 0.9rem;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.83rem; font-weight: 500; color: var(--text-secondary);
+      cursor: pointer; transition: all 0.15s;
+      display: flex; align-items: center; gap: 0.3rem;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active {
+      background: var(--accent); border-color: var(--accent);
+      color: #fff; font-weight: 700;
+    }
+    .filter-btn .count {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem; opacity: 0.75;
+    }
+
+    /* ── SECTION ── */
+    .subject-section { margin-bottom: 2.5rem; }
+    .subject-heading {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .subject-icon { font-size: 1.1rem; }
+    .subject-name {
+      font-size: 1rem; font-weight: 700; color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .subject-rule {
+      flex: 1; height: 1px; background: var(--border);
+    }
+    .subject-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem; color: var(--text-secondary);
+    }
+
+    /* ── CARD GRID ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    /* ── PRESENTATION CARD ── */
+    .pres-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .pres-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    .card-banner {
+      height: 72px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; position: relative; overflow: hidden;
+    }
+    .card-banner-emoji {
+      font-size: 2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+      position: relative; z-index: 1;
+    }
+    .card-banner-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.18);
+    }
+    .card-body {
+      padding: 0.9rem 1rem 0.8rem;
+      flex: 1; display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .card-title {
+      font-size: 0.9rem; font-weight: 700;
+      color: var(--text); line-height: 1.4;
+      letter-spacing: -0.01em;
+    }
+    .card-desc {
+      font-size: 0.8rem; color: var(--text-secondary);
+      line-height: 1.55; flex: 1;
+    }
+    .card-tags {
+      display: flex; flex-wrap: wrap; gap: 0.3rem;
+      margin-top: 0.15rem;
+    }
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.67rem; font-weight: 700;
+      padding: 0.15em 0.5em;
+      border-radius: 4px; white-space: nowrap;
+    }
+    .tag-blue   { background: var(--tag-blue-bg);   color: var(--tag-blue); }
+    .tag-green  { background: var(--tag-green-bg);  color: var(--tag-green); }
+    .tag-purple { background: var(--tag-purple-bg); color: var(--tag-purple); }
+    .tag-orange { background: var(--tag-orange-bg); color: var(--tag-orange); }
+
+    .card-footer {
+      padding: 0.55rem 1rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .card-path {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.67rem; color: var(--text-secondary);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 180px;
+    }
+    .card-open {
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--accent); white-space: nowrap;
+      display: flex; align-items: center; gap: 0.2rem;
+    }
+    .card-open svg { width: 11px; height: 11px; fill: currentColor; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      text-align: center; padding: 4rem 2rem;
+      color: var(--text-secondary);
+    }
+    .empty-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .empty-msg { font-size: 0.95rem; }
+
+    /* ── ERROR BANNER ── */
+    .error-banner {
+      background: #fff3cd; border: 1px solid #ffc107;
+      border-radius: var(--radius); padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem; font-size: 0.875rem;
+      color: #856404; display: none;
+    }
+    .error-banner code {
+      background: rgba(0,0,0,0.07); padding: 0.1em 0.4em;
+      border-radius: 4px; font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .main { padding: 1.2rem 1rem 3rem; }
+      .header-inner { padding: 0 1rem; }
+      .site-header { padding: 0; }
+      .card-grid { grid-template-columns: 1fr; }
+      .header-search { max-width: 100%; }
+      .total-badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title">수업 자료 <span>대시보드</span></h1>
+      <div class="header-search">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5
+                   6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5
+                   4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5
+                   5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
+        <input type="search" id="searchInput" placeholder="제목, 태그 검색…" autocomplete="off" aria-label="프레젠테이션 검색">
+      </div>
+      <span class="total-badge" id="totalBadge"></span>
+    </div>
+  </header>
+
+  <main class="main" id="mainContent">
+    <div class="error-banner" id="errorBanner">
+      ⚠️ <strong>pages.json을 불러올 수 없습니다.</strong>
+      로컬 서버를 통해 열어주세요:
+      <code>python -m http.server 8080</code>
+      → <code>http://localhost:8080</code>
+    </div>
+    <div class="filter-bar" id="filterBar" role="tablist" aria-label="과목 필터"></div>
+    <div id="content"></div>
+  </main>
+
+  <script>
+  (function () {
+    var searchInput = document.getElementById('searchInput');
+    var filterBar   = document.getElementById('filterBar');
+    var content     = document.getElementById('content');
+    var totalBadge  = document.getElementById('totalBadge');
+    var errorBanner = document.getElementById('errorBanner');
+
+    var allSubjects = [];
+    var activeFilter = 'all';
+    var searchQuery  = '';
+
+    /* ── fetch pages.json ── */
+    fetch('pages.json')
+      .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function(data) {
+        allSubjects = data.subjects || [];
+        buildFilters();
+        render();
+      })
+      .catch(function() {
+        errorBanner.style.display = 'block';
+        content.innerHTML = '';
+      });
+
+    /* ── build filter tabs ── */
+    function buildFilters() {
+      var total = allSubjects.reduce(function(s, sub) { return s + sub.pages.length; }, 0);
+      totalBadge.textContent = total + '개 자료';
+
+      filterBar.innerHTML = '';
+      var allBtn = makeFilterBtn('전체', 'all', total);
+      filterBar.appendChild(allBtn);
+
+      allSubjects.forEach(function(sub) {
+        var btn = makeFilterBtn(
+          (sub.icon || '') + ' ' + sub.name,
+          sub.name,
+          sub.pages.length
+        );
+        filterBar.appendChild(btn);
+      });
+    }
+
+    function makeFilterBtn(label, key, count) {
+      var btn = document.createElement('button');
+      btn.className = 'filter-btn' + (key === activeFilter ? ' active' : '');
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', key === activeFilter ? 'true' : 'false');
+      btn.innerHTML =
+        '<span>' + escHtml(label) + '</span>' +
+        '<span class="count">' + count + '</span>';
+      btn.addEventListener('click', function() {
+        activeFilter = key;
+        document.querySelectorAll('.filter-btn').forEach(function(b) {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        render();
+      });
+      return btn;
+    }
+
+    /* ── search ── */
+    searchInput.addEventListener('input', function() {
+      searchQuery = searchInput.value.trim().toLowerCase();
+      render();
+    });
+
+    /* ── render ── */
+    function render() {
+      content.innerHTML = '';
+      var hasAny = false;
+
+      allSubjects.forEach(function(sub) {
+        if (activeFilter !== 'all' && activeFilter !== sub.name) return;
+
+        var filtered = sub.pages.filter(function(p) {
+          if (!searchQuery) return true;
+          var haystack = [
+            p.title,
+            p.description,
+            (p.tags || []).map(function(t) { return t.label; }).join(' ')
+          ].join(' ').toLowerCase();
+          return haystack.indexOf(searchQuery) !== -1;
+        });
+
+        if (filtered.length === 0) return;
+        hasAny = true;
+
+        var section = document.createElement('section');
+        section.className = 'subject-section';
+        section.innerHTML =
+          '<div class="subject-heading">' +
+            '<span class="subject-icon" aria-hidden="true">' + escHtml(sub.icon || '📁') + '</span>' +
+            '<span class="subject-name">' + escHtml(sub.name) + '</span>' +
+            '<div class="subject-rule" aria-hidden="true"></div>' +
+            '<span class="subject-count">' + filtered.length + '개</span>' +
+          '</div>' +
+          '<div class="card-grid" role="list"></div>';
+
+        var grid = section.querySelector('.card-grid');
+        filtered.forEach(function(page) {
+          grid.appendChild(makeCard(page));
+        });
+
+        content.appendChild(section);
+      });
+
+      if (!hasAny) {
+        content.innerHTML =
+          '<div class="empty-state" role="status">' +
+            '<div class="empty-icon" aria-hidden="true">🔍</div>' +
+            '<p class="empty-msg">검색 결과가 없습니다.</p>' +
+          '</div>';
+      }
+    }
+
+    /* ── card builder ── */
+    function makeCard(page) {
+      var a = document.createElement('a');
+      a.className = 'pres-card';
+      a.href = page.path;
+      a.setAttribute('role', 'listitem');
+      a.setAttribute('aria-label', page.title + ' 열기');
+
+      var gradient = page.gradient || 'linear-gradient(135deg, #4c6ef5, #228be6)';
+      var tags = (page.tags || []).map(function(t) {
+        return '<span class="tag tag-' + escHtml(t.color || 'blue') + '">' + escHtml(t.label) + '</span>';
+      }).join('');
+
+      a.innerHTML =
+        '<div class="card-banner" style="background:' + gradient + '" aria-hidden="true">' +
+          '<div class="card-banner-overlay"></div>' +
+          '<span class="card-banner-emoji">' + escHtml(page.emoji || '📄') + '</span>' +
+        '</div>' +
+        '<div class="card-body">' +
+          '<h2 class="card-title">' + escHtml(page.title) + '</h2>' +
+          (page.description
+            ? '<p class="card-desc">' + escHtml(page.description) + '</p>'
+            : '') +
+          (tags ? '<div class="card-tags">' + tags + '</div>' : '') +
+        '</div>' +
+        '<div class="card-footer">' +
+          '<span class="card-path" title="' + escHtml(page.path) + '">' + escHtml(page.path) + '</span>' +
+          '<span class="card-open">' +
+            '열기' +
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>' +
+          '</span>' +
+        '</div>';
+
+      return a;
+    }
+
+    function escHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  })();
+  </script>
+</body>
+</html>
