@@ -16,6 +16,19 @@
             { "label": "과목 선택", "color": "orange" }
           ],
           "gradient": "linear-gradient(90deg, #E8000D, #111111)"
+        },
+        {
+          "title": "2022 개정 교육과정 및 고교학점제 — 과목 선택 유의점 안내",
+          "path": "교육과정/담임교사연수-과목선택유의점/index.html",
+          "emoji": "✅",
+          "description": "2026년 4월 21일 담임교사 연수용. 2015·2022 교육과정 교과 구조 비교, 과목 유형별 성적 산출 방식, 고교학점제 192학점 이수 조건, 담임 상담 유의점(국·영·수 81학점 이하·위계), 과목 선택 일정 수록.",
+          "tags": [
+            { "label": "담임연수", "color": "blue" },
+            { "label": "미이수제도", "color": "orange" },
+            { "label": "이수학점", "color": "green" },
+            { "label": "2026.4.21", "color": "purple" }
+          ],
+          "gradient": "linear-gradient(90deg, #003087, #1a4ab0)"
         }
       ]
     }

@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ':*)",
+      "Bash(python3:*)",
+      "Bash(where python:*)",
+      "Bash(powershell:*)",
+      "Read(//c/Users/로컬관리자/AppData/Local/Programs/**)",
+      "Bash(ls /c/Python*)",
+      "Bash(grep -v '^$')",
+      "Bash(pdftotext -layout \"/e/1. 교육과정부/참고 자료/2026학년도+전북특별자치도+고등학교+교육과정.pdf\" /tmp/jeonbuk_curriculum.txt)",
+      "Bash(pdftotext -layout \"/e/1. 교육과정부/참고 자료/2028 대입 권장이수과목 내역_20250405\\(경희대동국대서울대\\).pdf\" /tmp/recommended_subjects.txt)",
+      "Bash(pdftotext -layout \"/c/Users/로컬관리자/Downloads/2028학년도 전공 연계 과목 선택 안내.pdf\" /tmp/snu_guide.txt)",
+      "Bash(grep -v \"^[[:space:]]*$\")",
+      "Bash(awk '{print NR+54\": \"$0}')",
+      "Bash(awk -F'\\\\t' '{print \\($1-1\\)\": \"$2}')",
+      "Bash(python:*)",
+      "Bash(pip show:*)",
+      "Bash(py --version)",
+      "Bash(cmd:*)",
+      "Bash(powershell.exe:*)",
+      "Bash(node -e \"const fs = require\\('fs'\\); console.log\\(fs.statSync\\('C:/Users/로컬관리자/Documents/카카오톡 받은 파일/2026학년도 전북특별자치도 고등학교 교육과정.pdf'\\).size\\);\")",
+      "Bash(node:*)",
+      "Bash(npm list:*)",
+      "Bash(cd /tmp)",
+      "Bash(npm install:*)",
+      "Bash(xargs grep:*)",
+      "Bash(py -c \"import sys; print\\(sys.version\\)\")",
+      "Read(//usr/**)",
+      "Read(//usr/local/**)",
+      "Bash(grep -v \"^[^가-힣a-zA-Z0-9]*$\")",
+      "Bash(xxd \"/c/Users/로컬관리자/Documents/카카오톡 받은 파일/2026학년도 전북특별자치도 고등학교 교육과정.pdf\")",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Program Files \\(x86\\)/**)",
+      "Bash(pip install:*)",
+      "Bash(npm --version)",
+      "Bash(npx playwright:*)"
+    ]
+  }
+}
