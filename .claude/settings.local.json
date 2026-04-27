@@ -34,7 +34,12 @@
       "Read(//c/Program Files \\(x86\\)/**)",
       "Bash(pip install:*)",
       "Bash(npm --version)",
-      "Bash(npx playwright:*)"
+      "Bash(npx playwright:*)",
+      "Bash(py:*)",
+      "Bash(ls /usr/bin/python* /usr/local/bin/python*)",
+      "Read(//mingw64/**)",
+      "Bash(ls /c/Python*/python.exe)",
+      "WebFetch(domain:commons.wikimedia.org)"
     ]
   }
 }

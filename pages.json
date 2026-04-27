@@ -1,6 +1,25 @@
 {
   "subjects": [
     {
+      "name": "정치와법",
+      "icon": "⚖️",
+      "pages": [
+        {
+          "title": "지방 자치의 의의 — 의미·의의·우리나라 지방 자치",
+          "path": "정치와법/지방자치의의의/index.html",
+          "emoji": "🏛️",
+          "description": "고등학생 대상 수업자료. 지방 자치의 의미(단체·주민 자치), 풀뿌리 민주주의·수직적 권력 분립 의의, 우리나라 지방 자치 역사·기관·주민 참여 제도·현실과 과제 수록.",
+          "tags": [
+            { "label": "지방자치", "color": "orange" },
+            { "label": "풀뿌리민주주의", "color": "blue" },
+            { "label": "고등학생", "color": "green" },
+            { "label": "정치와법", "color": "purple" }
+          ],
+          "gradient": "linear-gradient(90deg, #F27321, #1B7ED4)"
+        }
+      ]
+    },
+    {
       "name": "교육과정",
       "icon": "📋",
       "pages": [

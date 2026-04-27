@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>if(!location.pathname.endsWith('/')&&!location.pathname.endsWith('.html')){var b=document.createElement('base');b.href=location.pathname+'/';document.head.appendChild(b);}</script>
+  <title>지방 자치의 의의 — 정치와 법</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== 1. CSS Variables ===== */
+    :root {
+      --style-bg: #FFFFFF;
+      --style-primary: #F27321;
+      --style-accent: #1B7ED4;
+      --style-text: #222222;
+      --style-text-secondary: #595959;
+
+      --def-bg: #FFFDE7;
+      --def-border: #FFC107;
+      --hl-bg: #E3F2FD;
+      --hl-border: #1B7ED4;
+      --danger: #D32F2F;
+    }
+
+    /* ===== 2. Reset ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%;
+      font-size: clamp(16px, 1.5vw, 28px);
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+      background: #ECEFF1;
+      overflow: hidden;
+      color: var(--style-text);
+    }
+
+    /* ===== 3. Accessibility ===== */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .skip-link {
+      position: absolute; top: -40px; left: 0;
+      background: var(--style-primary); color: #fff;
+      padding: 8px 16px; z-index: 9999; font-size: 14px;
+      border-radius: 0 0 4px 0; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+    :focus-visible { outline: 3px solid var(--style-primary); outline-offset: 2px; border-radius: 4px; }
+    :focus:not(:focus-visible) { outline: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ===== 4. Progress Bar ===== */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: var(--style-primary);
+      z-index: 1000; transition: width 0.3s ease;
+      will-change: width; transform: translateZ(0);
+    }
+
+    /* ===== 5. Presentation Container ===== */
+    .presentation {
+      height: calc(100vh - 42px);
+      position: relative; overflow: hidden;
+    }
+
+    /* ===== 6. Slides ===== */
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0.8rem 1.2rem;
+      opacity: 0; pointer-events: none;
+      transform: translateZ(0); backface-visibility: hidden;
+    }
+    .slide.active {
+      opacity: 1; pointer-events: auto;
+      animation: slideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+    .slide.will-animate { will-change: opacity, transform; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== 7. Browser Card ===== */
+    .browser-card {
+      width: 100%; max-width: 1200px;
+      max-height: calc(100vh - 4.8rem);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      background: var(--style-bg);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.08);
+      position: relative; z-index: 1;
+    }
+    .browser-topbar {
+      display: flex; align-items: center;
+      padding: 0.48rem 1.2rem;
+      background: var(--style-primary);
+      border-radius: 0.5rem 0.5rem 0 0;
+      flex-shrink: 0; gap: 0.6rem;
+    }
+    .topbar-chapter {
+      font-size: 0.72rem; font-family: 'Inter', sans-serif;
+      color: rgba(255,255,255,0.72); white-space: nowrap; flex-shrink: 0;
+    }
+    .topbar-title {
+      font-size: 0.8rem; font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; color: rgba(255,255,255,0.95);
+      margin: 0 auto; letter-spacing: 0.02em; text-align: center;
+    }
+    .browser-content {
+      flex: 1; overflow-y: auto;
+      padding: 0.9rem 1.8rem 0.7rem;
+    }
+
+    /* ===== 8. Cover Slide ===== */
+    .slide.cover-slide { padding: 0.8rem 1.2rem; }
+    .cover-bg {
+      position: absolute; inset: 0;
+      background-color: #1A3A6B;
+      background-size: cover; background-position: center;
+    }
+    .cover-overlay {
+      position: absolute; inset: 0;
+      background: rgba(8, 25, 60, 0.70);
+    }
+    .browser-card--frameless {
+      background: transparent;
+      box-shadow: none;
+    }
+    .browser-card--frameless .browser-topbar {
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(6px);
+    }
+    .cover-body {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; gap: 0.65rem;
+      padding: 2rem 2rem 1.6rem;
+      flex: 1;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: var(--style-primary); color: #fff;
+      font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 700;
+      padding: 0.22rem 0.9rem; border-radius: 2rem; letter-spacing: 0.05em;
+    }
+    .cover-subject {
+      font-size: 0.85rem; color: rgba(255,255,255,0.65);
+      font-family: 'Noto Serif KR', serif; letter-spacing: 0.08em;
+    }
+    .cover-title {
+      font-size: 2.5rem; font-weight: 800;
+      color: #ffffff; line-height: 1.2;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .cover-subtitle {
+      font-size: 1rem; color: rgba(255,255,255,0.8);
+      font-family: 'Noto Serif KR', serif; line-height: 1.6;
+    }
+    .cover-divider {
+      width: 50px; height: 3px;
+      background: var(--style-primary);
+      border-radius: 2px; margin: 0.1rem auto;
+    }
+    .cover-meta {
+      font-size: 0.82rem; color: rgba(255,255,255,0.60);
+      display: flex; gap: 0.5rem; align-items: center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ===== 9. Section Header ===== */
+    .section-header { margin-bottom: 0.5rem; }
+    .section-header h2 {
+      font-size: 1.38rem; font-weight: 700;
+      color: var(--style-text);
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.25; display: flex; align-items: center;
+    }
+    .section-icon {
+      display: inline; font-size: 1.1em;
+      margin-right: 0.4em; vertical-align: -0.08em;
+      color: var(--style-primary);
+    }
+    .section-subtitle {
+      font-size: 0.85rem; color: var(--style-text-secondary);
+      margin-top: 0.2rem; margin-left: 0.1rem;
+      font-family: 'Noto Serif KR', serif;
+    }
+    .section-rule {
+      height: 2px;
+      background: linear-gradient(to right, var(--style-primary) 40%, rgba(242,115,33,0.1));
+      border: none; margin: 0.45rem 0 0.6rem;
+    }
+
+    /* ===== 10. Cards ===== */
+    .card-grid { display: grid; gap: 0.55rem; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .card {
+      background: #FAFAFA; border: 1px solid #EBEBEB;
+      border-left: 4px solid var(--style-primary);
+      border-radius: 0.4rem; padding: 0.8rem 1rem;
+      contain: layout style;
+    }
+    .card.card-accent { border-left-color: var(--style-accent); }
+    .card-title {
+      font-size: 1rem; font-weight: 700;
+      color: var(--style-text);
+      font-family: 'Noto Sans KR', sans-serif;
+      margin-bottom: 0.3rem;
+    }
+    .card-desc {
+      font-size: 0.87rem; color: var(--style-text-secondary);
+      line-height: 1.6; font-family: 'Noto Serif KR', serif;
+    }
+    .card-sub {
+      font-size: 0.8rem; color: var(--style-text-secondary);
+      font-family: 'Noto Serif KR', serif; line-height: 1.5;
+    }
+    .card-hr {
+      border: none; border-top: 1px dashed #DDDDDD;
+      margin: 0.4rem 0;
+    }
+    @keyframes popUp {
+      from { opacity: 0; transform: translateY(14px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .slide.active .card { animation: popUp 0.45s ease-out both; }
+    .slide.active .card:nth-child(2) { animation-delay: 0.08s; }
+    .slide.active .card:nth-child(3) { animation-delay: 0.16s; }
+    .slide.active .card:nth-child(4) { animation-delay: 0.24s; }
+
+    /* ===== 11. Badges ===== */
+    .badge {
+      display: inline-block; padding: 0.12rem 0.55rem;
+      border-radius: 2rem; font-size: 0.78rem; font-weight: 700;
+      font-family: 'Inter', sans-serif;
+    }
+    .badge-orange { background: #FFF3E0; color: var(--style-primary); }
+    .badge-blue   { background: #E3F2FD; color: var(--style-accent); }
+    .badge-red    { background: #FFEBEE; color: var(--danger); }
+
+    /* ===== 12. Definition Box ===== */
+    .def-box {
+      background: var(--def-bg);
+      border-left: 4px solid var(--def-border);
+      border-radius: 0 0.4rem 0.4rem 0;
+      padding: 0.65rem 1rem; margin-bottom: 0.55rem;
+    }
+    .def-label {
+      font-size: 0.75rem; font-weight: 700;
+      color: #B8860B; letter-spacing: 0.08em;
+      font-family: 'Inter', sans-serif; margin-bottom: 0.25rem;
+    }
+    .def-box p {
+      font-size: 0.93rem; color: var(--style-text);
+      line-height: 1.65; font-family: 'Noto Serif KR', serif;
+    }
+
+    /* ===== 13. Highlight Box ===== */
+    .highlight-box {
+      background: var(--hl-bg);
+      border-left: 4px solid var(--hl-border);
+      border-radius: 0 0.4rem 0.4rem 0;
+      padding: 0.65rem 1rem;
+    }
+    .highlight-box p, .highlight-box li {
+      font-size: 0.9rem; color: var(--style-text);
+      line-height: 1.65; font-family: 'Noto Serif KR', serif;
+    }
+    .highlight-box ul { padding-left: 1.1rem; }
+    .hl-label {
+      font-size: 0.75rem; font-weight: 700;
+      color: var(--style-accent); letter-spacing: 0.06em;
+      font-family: 'Inter', sans-serif; margin-bottom: 0.25rem;
+    }
+    .mt-sm { margin-top: 0.5rem; }
+    .mt-md { margin-top: 0.7rem; }
+
+    /* ===== 14. Two-Column ===== */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 0;
+    }
+    .col-left, .col-right { padding: 0 0.8rem; }
+    .col-left { padding-left: 0; }
+    .col-right { padding-right: 0; }
+    .col-divider { background: #E0E0E0; margin: 0; }
+    .col-title {
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--style-primary);
+      font-family: 'Noto Sans KR', sans-serif;
+      padding-bottom: 0.25rem;
+      border-bottom: 2px solid var(--style-primary);
+      margin-bottom: 0.45rem;
+    }
+    .col-title.accent  { color: var(--style-accent); border-color: var(--style-accent); }
+    .col-title.danger  { color: var(--danger); border-color: var(--danger); }
+    .col-sub-label {
+      font-size: 0.8rem; color: var(--style-text-secondary);
+      margin: 0.4rem 0 0.2rem; font-family: 'Noto Serif KR', serif;
+    }
+    .col-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.3rem;
+    }
+    .col-list li {
+      font-size: 0.87rem; color: var(--style-text);
+      line-height: 1.55; font-family: 'Noto Serif KR', serif;
+      padding-left: 0.85rem; position: relative;
+    }
+    .col-list li::before {
+      content: '◆'; color: var(--style-primary);
+      font-size: 0.42rem; position: absolute; left: 0; top: 0.38em;
+    }
+    .col-list.accent li::before { color: var(--style-accent); }
+    .col-list.danger li::before { color: var(--danger); }
+
+    /* ===== 15. Timeline ===== */
+    .timeline {
+      display: flex; gap: 0;
+      position: relative; margin-top: 0.55rem;
+    }
+    .timeline::before {
+      content: ''; position: absolute;
+      top: 0.42rem; left: 1.8rem; right: 1.8rem; height: 2px;
+      background: linear-gradient(to right, var(--style-primary), var(--style-accent));
+      z-index: 0;
+    }
+    .timeline-item {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      padding: 0 0.25rem; position: relative; z-index: 1;
+    }
+    .timeline-marker {
+      width: 13px; height: 13px;
+      border-radius: 50%; border: 3px solid var(--style-primary);
+      background: #fff; margin-bottom: 0.45rem; flex-shrink: 0;
+    }
+    .timeline-item.highlight .timeline-marker {
+      background: var(--style-primary);
+      width: 17px; height: 17px;
+    }
+    .timeline-item.danger .timeline-marker {
+      border-color: var(--danger); background: #FFEBEE;
+    }
+    .timeline-date {
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--style-primary); font-family: 'Inter', sans-serif;
+      display: block;
+    }
+    .timeline-item.danger .timeline-date { color: var(--danger); }
+    .timeline-title {
+      font-size: 0.83rem; font-weight: 700;
+      color: var(--style-text); margin: 0.12rem 0;
+      font-family: 'Noto Sans KR', sans-serif; line-height: 1.3;
+    }
+    .timeline-desc {
+      font-size: 0.8rem; color: var(--style-text-secondary);
+      line-height: 1.4; font-family: 'Noto Serif KR', serif;
+    }
+
+    /* ===== 16. Comparison Table ===== */
+    .table-wrapper {
+      overflow-x: auto; border-radius: 0.4rem;
+      margin-top: 0.4rem; border: 1px solid #E0E0E0;
+    }
+    .comparison-table {
+      width: 100%; border-collapse: collapse;
+      font-family: 'Noto Serif KR', serif;
+    }
+    .comparison-table thead th {
+      background: var(--style-primary); color: #fff;
+      padding: 0.52rem 1rem; font-size: 0.88rem;
+      font-family: 'Noto Sans KR', sans-serif; font-weight: 700;
+      text-align: center;
+    }
+    .comparison-table thead th:first-child { background: #444444; }
+    .comparison-table thead th.th-accent { background: var(--style-accent); }
+    .comparison-table tbody td {
+      padding: 0.48rem 1rem; font-size: 0.87rem;
+      color: var(--style-text); border-bottom: 1px solid #EEEEEE;
+      text-align: center; line-height: 1.5;
+    }
+    .comparison-table tbody th[scope="row"] {
+      background: #F5F5F5; color: var(--style-text);
+      font-weight: 700; text-align: left;
+      padding: 0.48rem 1rem; font-size: 0.87rem;
+      border-bottom: 1px solid #EEEEEE;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .comparison-table tbody tr:nth-child(even) td { background: #F9F9F9; }
+
+    /* --- bordered variant (슬라이드 9 전용) --- */
+    .comparison-table.table-bordered thead th {
+      border: 1.5px solid rgba(255,255,255,0.35);
+    }
+    .comparison-table.table-bordered tbody td {
+      border: 1.5px solid #C8C8C8;
+    }
+    .comparison-table.table-bordered tbody th[scope="row"] {
+      border: 1.5px solid #C0C0C0;
+      border-right: 2.5px solid #9E9E9E;
+    }
+
+    /* ===== 17. Activity List ===== */
+    .activity-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.45rem;
+    }
+    .activity-item {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      padding: 0.6rem 0.9rem;
+      background: #FAFAFA; border-radius: 0.4rem;
+      border-left: 3px solid var(--style-primary);
+    }
+    .activity-icon {
+      font-size: 1.3rem; flex-shrink: 0; margin-top: 0.05rem;
+    }
+    .num-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 1.4rem; height: 1.4rem; border-radius: 50%;
+      background: var(--style-primary); color: #fff;
+      font-size: 0.78rem; font-weight: 700;
+      font-family: 'Inter', sans-serif; flex-shrink: 0; margin-top: 0.05rem;
+    }
+    .activity-title {
+      font-size: 0.93rem; font-weight: 700;
+      color: var(--style-text);
+      font-family: 'Noto Sans KR', sans-serif; margin-bottom: 0.1rem;
+    }
+    .activity-desc {
+      font-size: 0.85rem; color: var(--style-text-secondary);
+      line-height: 1.55; font-family: 'Noto Serif KR', serif;
+    }
+
+    /* ===== 18. Stat Grid (학습 목표) ===== */
+    .stat-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0.55rem; margin: 0.4rem 0;
+    }
+    .stat-item {
+      text-align: center; padding: 0.75rem 0.5rem;
+      background: #FFF8F4;
+      border: 1px solid #FFE0CC;
+      border-top: 3px solid var(--style-primary);
+      border-radius: 0.4rem;
+    }
+    .stat-number {
+      display: block; font-size: 1.6rem; font-weight: 800;
+      color: var(--style-primary); font-family: 'Inter', sans-serif;
+      line-height: 1.1;
+    }
+    .stat-label {
+      display: block; font-size: 0.83rem;
+      color: var(--style-text);
+      font-family: 'Noto Sans KR', sans-serif;
+      margin-top: 0.25rem; line-height: 1.45;
+    }
+
+    /* ===== 19. End Slide ===== */
+    .end-slide {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; gap: 0.75rem;
+    }
+    .end-title {
+      font-size: 2rem; font-weight: 800;
+      color: var(--style-primary);
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .end-subtitle {
+      font-size: 0.93rem; color: var(--style-text-secondary);
+      font-family: 'Noto Serif KR', serif;
+    }
+    .end-summary {
+      width: 100%; max-width: 680px; text-align: left;
+    }
+    .summary-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.28rem;
+    }
+    .summary-list li {
+      font-size: 0.88rem; color: var(--style-text);
+      line-height: 1.55; font-family: 'Noto Serif KR', serif;
+    }
+    .end-footer {
+      font-size: 0.8rem; color: var(--style-text-secondary);
+      font-family: 'Noto Serif KR', serif;
+    }
+
+    /* ===== 20. Nav Bar ===== */
+    .nav-bar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem; padding: 0.3rem 1.5rem;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid #E0E0E0;
+      z-index: 999; height: 42px;
+    }
+    .nav-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 1.8rem; height: 1.8rem;
+      border: 1.5px solid #CCCCCC; border-radius: 50%;
+      background: #fff; cursor: pointer;
+      font-size: 0; color: #555;
+      transition: all 0.2s; padding: 0; line-height: 1;
+    }
+    .nav-btn svg { width: 0.55rem; height: 0.55rem; fill: currentColor; display: block; }
+    .nav-btn:hover:not(:disabled) { border-color: var(--style-primary); background: var(--style-primary); }
+    .nav-btn:hover:not(:disabled) svg { fill: #fff; }
+    .nav-btn:focus-visible { outline: 3px solid var(--style-primary); outline-offset: 2px; }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .nav-counter {
+      font-size: 13px; font-weight: 700; color: #555;
+      min-width: 3rem; text-align: center;
+      display: flex; align-items: center; gap: 0.15rem; line-height: 1;
+    }
+    .slide-input {
+      width: 1.4rem; text-align: center; border: none;
+      border-bottom: 1.5px solid transparent;
+      background: transparent; font-size: 13px; font-weight: 700;
+      color: inherit; font-family: inherit; padding: 0;
+      outline: none; cursor: pointer; transition: border-color 0.2s; line-height: 1;
+    }
+    .slide-input:hover { border-bottom-color: var(--style-primary); }
+    .slide-input:focus { border-bottom-color: var(--style-primary); background: #FFF3E0; border-radius: 4px; }
+
+    /* ===== 20-a. 슬라이드 4 — 풀뿌리 민주주의 이미지 레이아웃 ===== */
+    .slide4-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 36%;
+      gap: 0.8rem;
+      align-items: start;
+    }
+    .slide4-img-wrap {
+      border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+      border: 1.5px solid #E0E0E0;
+    }
+    .slide4-img-wrap img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .slide4-img-fallback {
+      display: none;
+      width: 100%; height: 220px;
+      background: #F5F5F5;
+      align-items: center; justify-content: center;
+      flex-direction: column; gap: 0.3rem;
+      color: var(--style-text-secondary); font-size: 0.6rem;
+    }
+    .slide4-img-caption {
+      font-size: 0.48rem;
+      color: var(--style-text-secondary);
+      padding: 0.22rem 0.5rem;
+      background: #F5F5F5;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .slide4-img-label {
+      margin-top: 0.45rem;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--style-accent);
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+    @media (max-width: 768px) {
+      .slide4-content-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== 20-b. 사례 슬라이드 — 지방 자치 단체 시각화 ===== */
+    .hier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem 0.7rem;
+      margin-bottom: 0.5rem;
+    }
+    .hier-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+    }
+    .hier-region-label {
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      color: var(--style-text-secondary);
+      margin-bottom: 0.05rem;
+    }
+    .hier-box {
+      width: 100%;
+      border-radius: 0.35rem;
+      padding: 0.35rem 0.5rem;
+      text-align: center;
+    }
+    .hier-box.gwangyeok {
+      background: var(--style-accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.72rem;
+    }
+    .hier-box.gicho {
+      background: var(--style-primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.72rem;
+    }
+    .hier-box-sub {
+      font-size: 0.5rem;
+      font-weight: 400;
+      opacity: 0.88;
+      margin-top: 0.08rem;
+    }
+    .hier-arrow {
+      color: var(--style-text-secondary);
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .case-bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+      margin-top: 0.3rem;
+    }
+    .inst-card {
+      border: 1.5px solid var(--style-accent);
+      border-radius: 0.4rem;
+      padding: 0.45rem 0.6rem;
+      background: #EFF6FF;
+    }
+    .inst-card-title {
+      font-size: 0.67rem;
+      font-weight: 700;
+      color: var(--style-accent);
+      margin-bottom: 0.25rem;
+      padding-bottom: 0.2rem;
+      border-bottom: 1px solid #BFDBFE;
+    }
+    .inst-units {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.25rem;
+    }
+    .inst-unit {
+      background: #fff;
+      border-radius: 0.3rem;
+      padding: 0.28rem 0.4rem;
+      border-left: 3px solid var(--style-accent);
+    }
+    .inst-unit-name {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--style-text);
+    }
+    .inst-unit-sub {
+      font-size: 0.5rem;
+      color: var(--style-text-secondary);
+      margin-top: 0.08rem;
+      line-height: 1.4;
+    }
+    .warning-card {
+      border: 1.5px solid var(--danger);
+      border-radius: 0.4rem;
+      padding: 0.45rem 0.6rem;
+      background: #FFF5F5;
+    }
+    .warning-card-title {
+      font-size: 0.67rem;
+      font-weight: 700;
+      color: var(--danger);
+      margin-bottom: 0.25rem;
+    }
+    .warning-case {
+      background: #fff;
+      border-radius: 0.3rem;
+      padding: 0.28rem 0.5rem;
+      border-left: 3px solid var(--danger);
+      margin-bottom: 0.3rem;
+      font-size: 0.6rem;
+      line-height: 1.45;
+    }
+    .warning-note {
+      background: #FFFBEB;
+      border-left: 3px solid #F59E0B;
+      border-radius: 0.25rem;
+      padding: 0.28rem 0.5rem;
+      font-size: 0.57rem;
+      color: #78350F;
+      line-height: 1.5;
+    }
+
+    /* ===== 21. Print / PDF ===== */
+    .print-btn, .ppt-btn {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.28rem;
+      height: 1.8rem; padding: 0 0.65rem;
+      border: 1.5px solid #CCCCCC; border-radius: 0.9rem;
+      background: #fff; cursor: pointer;
+      font-size: 11px; font-weight: 700; color: #555;
+      font-family: 'Noto Sans KR', sans-serif;
+      transition: all 0.2s; line-height: 1; white-space: nowrap;
+    }
+    .print-btn svg, .ppt-btn svg { width: 0.7rem; height: 0.7rem; fill: currentColor; flex-shrink: 0; }
+    .print-btn:hover:not(:disabled) { border-color: var(--style-primary); background: var(--style-primary); color: #fff; }
+    .print-btn:focus-visible { outline: 3px solid var(--style-primary); outline-offset: 2px; }
+    .ppt-btn:hover:not(:disabled) { border-color: #217346; background: #217346; color: #fff; }
+    .ppt-btn:focus-visible { outline: 3px solid #217346; outline-offset: 2px; }
+    .ppt-btn:disabled { opacity: 0.65; cursor: not-allowed; }
+
+    @media print {
+      /* UI 요소 숨김 */
+      .nav-bar, .progress-bar, .skip-link, #slideAnnounce { display: none !important; }
+
+      /* 기본 레이아웃 초기화 */
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      html, body {
+        width: 100%; height: auto;
+        overflow: visible !important;
+        background: #fff !important;
+        font-size: 16px;
+      }
+
+      /* 프레젠테이션 컨테이너 해제 */
+      .presentation {
+        height: auto !important;
+        overflow: visible !important;
+        position: static !important;
+      }
+
+      /* 슬라이드 한 장 = 인쇄 한 페이지 */
+      .slide {
+        position: relative !important;
+        inset: auto !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        display: flex !important;
+        width: 100% !important;
+        height: 100vh !important;
+        padding: 0.5rem 0.8rem !important;
+        page-break-after: always;
+        break-after: page;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .slide:last-child { page-break-after: auto; break-after: auto; }
+
+      /* 카드 높이 제한 해제 */
+      .browser-card { max-height: none !important; }
+      .browser-content { overflow: visible !important; }
+
+      /* 표지 배경 */
+      .cover-bg { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    /* ===== 22. Responsive ===== */
+    @media (max-width: 1024px) {
+      html, body { font-size: clamp(15px, 2vw, 22px); }
+      .slide { padding: 0.6rem 0.8rem; }
+      .browser-content { padding: 0.7rem 1.3rem 0.6rem; }
+    }
+    @media (max-width: 768px) {
+      html, body { font-size: clamp(14px, 3vw, 20px); }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; gap: 0.6rem; }
+      .col-divider { display: none; }
+      .timeline { flex-direction: column; align-items: flex-start; }
+      .timeline::before {
+        top: 0.6rem; left: 0.55rem; width: 2px; height: auto;
+        right: auto; bottom: 0;
+      }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .hier-grid { grid-template-columns: 1fr; }
+      .case-bottom-grid { grid-template-columns: 1fr; }
+      .inst-units { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .browser-content { padding: 0.6rem 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#presentation" class="skip-link">본문으로 바로가기</a>
+
+  <div class="progress-bar" id="progressBar"
+       role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="12"
+       aria-label="프레젠테이션 진행률"></div>
+
+  <div class="presentation" id="presentation" role="main">
+
+    <!-- ===== Slide 1: Cover ===== -->
+    <div class="slide cover-slide active" data-slide="0"
+         role="region" aria-label="슬라이드 1: 표지">
+      <div class="cover-bg" data-bg="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Seoul_Metropolitan_Library_and_Seoul_City_Hall_during_Seoul_Spring_Festa_in_May_2025.jpg/1920px-Seoul_Metropolitan_Library_and_Seoul_City_Hall_during_Seoul_Spring_Festa_in_May_2025.jpg"></div>
+      <div class="cover-overlay"></div>
+      <div class="browser-card browser-card--frameless">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-title">Ⅱ. 민주 국가와 정부 · 3. 지방 자치의 이해</span>
+        </div>
+        <div class="cover-body">
+          <div class="cover-badge">2026학년도 정치와 법</div>
+          <p class="cover-subject">교과서 70~76쪽</p>
+          <h1 class="cover-title">지방 자치의 의의</h1>
+          <p class="cover-subtitle">지방 자치의 의미와 우리나라 지방 자치 이해</p>
+          <div class="cover-divider"></div>
+          <div class="cover-meta">
+            <span>정치와 법</span>
+            <span aria-hidden="true">·</span>
+            <span><time datetime="2026">2026</time></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 2: 학습 목표 ===== -->
+    <div class="slide" data-slide="1"
+         role="region" aria-label="슬라이드 2: 학습 목표">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">3. 지방 자치의 이해</span>
+          <span class="topbar-title">학습 목표</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 오늘 배울 내용</h2>
+            <p class="section-subtitle">이 수업이 끝나면 다음을 할 수 있습니다.</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+          <div class="stat-grid" role="list">
+            <div class="stat-item" role="listitem">
+              <span class="stat-number" aria-hidden="true">①</span>
+              <span class="stat-label">지방 자치의 의미를 설명할 수 있다</span>
+            </div>
+            <div class="stat-item" role="listitem">
+              <span class="stat-number" aria-hidden="true">②</span>
+              <span class="stat-label">지방 자치의 의의를 제시할 수 있다</span>
+            </div>
+            <div class="stat-item" role="listitem">
+              <span class="stat-number" aria-hidden="true">③</span>
+              <span class="stat-label">우리나라 지방 자치의 특징을 설명할 수 있다</span>
+            </div>
+            <div class="stat-item" role="listitem">
+              <span class="stat-number" aria-hidden="true">④</span>
+              <span class="stat-label">지방 자치의 현실과 과제를 파악할 수 있다</span>
+            </div>
+          </div>
+          <div class="highlight-box mt-md" role="note">
+            <span class="hl-label">핵심 학습 요소 KEY CONCEPTS</span>
+            <p>지방 자치 · 풀뿌리 민주주의 · 수직적 권력 분립 · 지방 의회 · 조례 · 지방 자치 단체장 · 규칙 · 주민 투표제 · 주민 소환제</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 3: 지방 자치의 의미 ===== -->
+    <div class="slide" data-slide="2"
+         role="region" aria-label="슬라이드 3: 지방 자치의 의미">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">01 지방 자치의 의의</span>
+          <span class="topbar-title">지방 자치의 의미</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 지방 자치의 의미와 유형</h2>
+            <p class="section-subtitle">지방 자치란 무엇인가?</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+          <div class="def-box" role="note">
+            <div class="def-label">정의 DEFINITION</div>
+            <p>일정 지역을 기초로 하는 단체나 지역 주민이 <strong>중앙 정부로부터 자율성을 확보</strong>하고, 해당 지역의 문제를 <strong>자신의 의사와 책임에 따라 자주적으로 처리</strong>하는 것</p>
+          </div>
+          <div class="card-grid grid-2" role="list">
+            <div class="card" role="listitem">
+              <h3 class="card-title">단체 자치</h3>
+              <p class="card-desc">중앙 정부로부터 상대적으로 <strong>독립된 지위</strong>의 지방 자치 단체가 그 지방의 문제를 자주적으로 처리하는 것</p>
+              <span class="badge badge-orange" style="margin-top:0.35rem; display:inline-block;">법적 독립성 강조</span>
+            </div>
+            <div class="card card-accent" role="listitem">
+              <h3 class="card-title">주민 자치</h3>
+              <p class="card-desc">그 지방의 공공 문제를 <strong>주민 의사에 따라</strong> 처리하는 것</p>
+              <span class="badge badge-blue" style="margin-top:0.35rem; display:inline-block;">민주적 참여 강조</span>
+            </div>
+          </div>
+          <div class="highlight-box mt-sm" role="note">
+            <p>✦ 대부분의 국가에서는 <strong>단체 자치와 주민 자치를 결합</strong>하여 실행합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 4: 지방 자치의 의의 ① 풀뿌리 민주주의 ===== -->
+    <div class="slide" data-slide="3"
+         role="region" aria-label="슬라이드 4: 지방 자치의 의의 - 풀뿌리 민주주의">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">01 지방 자치의 의의</span>
+          <span class="topbar-title">의의 ① 풀뿌리 민주주의 실현</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 의의 ① — 풀뿌리 민주주의의 실현</h2>
+            <p class="section-subtitle">지방 자치와 민주주의의 관계</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+          <div class="slide4-content-grid">
+            <!-- 왼쪽: 정의 + 내용 -->
+            <div>
+              <div class="def-box" role="note">
+                <div class="def-label">풀뿌리 민주주의 GRASSROOTS DEMOCRACY</div>
+                <p>시민들이 <strong>지역 기반의 의사 결정 과정</strong>을 거쳐 지역 공동체의 운영과 생활의 변화에 참여하는 민주주의의 한 형태</p>
+              </div>
+              <div class="two-col mt-sm">
+                <div class="col-left">
+                  <h3 class="col-title">민주주의 경험 축적</h3>
+                  <ul class="col-list" role="list">
+                    <li role="listitem">생활 주변의 다양한 문제를 <strong>자주적으로 해결</strong>하며 민주주의를 직접 경험</li>
+                    <li role="listitem">지역사회가 <strong>민주주의의 훈련장</strong> 역할 담당</li>
+                  </ul>
+                </div>
+                <div class="col-divider" aria-hidden="true"></div>
+                <div class="col-right">
+                  <h3 class="col-title accent">국가 민주주의 발전</h3>
+                  <ul class="col-list accent" role="list">
+                    <li role="listitem"><strong>국가 전체 민주주의 발전</strong>의 밑거름이 됨</li>
+                    <li role="listitem">지역 → 국가로 민주주의 문화 확산</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- 오른쪽: 이미지 -->
+            <div>
+              <div class="slide4-img-wrap">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Crowd_at_Chicago_Police_Accountability_Task_Force_Community_Meeting_-2_%2824620845689%29.jpg/1280px-Crowd_at_Chicago_Police_Accountability_Task_Force_Community_Meeting_-2_%2824620845689%29.jpg"
+                  alt="지역 주민 공청회에 참여한 시민들의 모습"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="slide4-img-fallback" aria-hidden="true">
+                  <span>이미지를 불러올 수 없습니다</span>
+                </div>
+                <div class="slide4-img-caption">주민 공청회 — 시민이 지역 현안을 직접 논의하는 풀뿌리 민주주의의 현장<br><span style="font-size:0.42rem;">© Wikimedia Commons / CC BY 2.0</span></div>
+              </div>
+              <div class="slide4-img-label">주민 공청회 (Community Meeting)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 5: 지방 자치의 의의 ② 권력 분립 ===== -->
+    <div class="slide" data-slide="4"
+         role="region" aria-label="슬라이드 5: 지방 자치의 의의 - 권력 분립">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">01 지방 자치의 의의</span>
+          <span class="topbar-title">의의 ② 권력 분립 원리의 실현</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 의의 ② — 권력 분립 원리의 실현</h2>
+            <p class="section-subtitle">수직적 권력 분립과 지방 자치</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+          <div class="table-wrapper" role="region" aria-label="권력 분립 유형 비교표">
+            <table class="comparison-table">
+              <caption class="sr-only">수평적·수직적 권력 분립 비교</caption>
+              <thead>
+                <tr>
+                  <th scope="col">구분</th>
+                  <th scope="col">수평적 권력 분립</th>
+                  <th scope="col" class="th-accent">수직적 권력 분립</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">분립 형태</th>
+                  <td>중앙 정부 내부에서의 분립</td>
+                  <td><strong>중앙 정부 ↔ 지방 자치 단체</strong></td>
+                </tr>
+                <tr>
+                  <th scope="row">관련 기관</th>
+                  <td>입법부 · 행정부 · 사법부</td>
+                  <td>중앙 정부 vs 지방 정부</td>
+                </tr>
+                <tr>
+                  <th scope="row">방지 목적</th>
+                  <td>국가 권력 남용 방지</td>
+                  <td><strong>권력의 중앙 집중 방지</strong></td>
+                </tr>
+                <tr>
+                  <th scope="row">지방 자치 관련성</th>
+                  <td>직접 관련 없음</td>
+                  <td><strong>지방 자치의 주요 의의</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="highlight-box mt-sm" role="note">
+            <span class="hl-label">핵심 포인트 KEY POINT</span>
+            <p>지방 자치를 통해 정치권력이 중앙 정부에 지나치게 집중되는 것을 방지함으로써 <strong>수직적 권력 분립의 원리 실현</strong>에 이바지합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 6: 우리나라 역사 ===== -->
+    <div class="slide" data-slide="5"
+         role="region" aria-label="슬라이드 6: 우리나라 지방 자치의 역사">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">02 우리나라의 지방 자치</span>
+          <span class="topbar-title">지방 자치 제도의 변화</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 우리나라 지방 자치 제도의 변화</h2>
+            <p class="section-subtitle">헌법 제정부터 현재까지의 발전 과정</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+          <div class="timeline" role="list" aria-label="지방 자치 역사 타임라인">
+            <div class="timeline-item" role="listitem">
+              <div class="timeline-marker"></div>
+              <time class="timeline-date" datetime="1948">1948년</time>
+              <h3 class="timeline-title">헌법 규정</h3>
+              <p class="timeline-desc">제헌 헌법에서 지방 자치 제도 규정</p>
+            </div>
+            <div class="timeline-item highlight" role="listitem">
+              <div class="timeline-marker"></div>
+              <time class="timeline-date" datetime="1952">1952년</time>
+              <h3 class="timeline-title">지방 의회 구성 <span class="badge badge-orange">최초</span></h3>
+              <p class="timeline-desc">주민 직선제로 최초의 지방 의회 구성</p>
+            </div>
+            <div class="timeline-item" role="listitem">
+              <div class="timeline-marker"></div>
+              <time class="timeline-date" datetime="1960">1960년</time>
+              <h3 class="timeline-title">직선제 확대</h3>
+              <p class="timeline-desc">모든 지방 자치 단체장을 직선제로 선출</p>
+            </div>
+            <div class="timeline-item danger" role="listitem">
+              <div class="timeline-marker"></div>
+              <span class="timeline-date">5·16 이후</span>
+              <h3 class="timeline-title">지방 의회 폐지</h3>
+              <p class="timeline-desc">지방 의회 폐지, 단체장 임명제 시행</p>
+            </div>
+            <div class="timeline-item highlight" role="listitem">
+              <div class="timeline-marker"></div>
+              <span class="timeline-date">1990년대~</span>
+              <h3 class="timeline-title">직선제 정착 <span class="badge badge-blue">현재</span></h3>
+              <p class="timeline-desc">각급 지방 의회·단체장 주민 직선제 정착</p>
+            </div>
+          </div>
+          <div class="highlight-box mt-md" role="note">
+            <p>✦ 현재는 주민 직선제를 통해 <strong>민주적 지방 자치</strong>가 안정적으로 운영되고 있습니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 7: 지방 자치 단체의 유형 ===== -->
+    <div class="slide" data-slide="6"
+         role="region" aria-label="슬라이드 7: 지방 자치 단체의 유형">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">02 우리나라의 지방 자치</span>
+          <span class="topbar-title">지방 자치 단체의 유형</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 지방 자치 단체의 유형</h2>
+            <p class="section-subtitle">급별 구분 · 기관별 구분</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+          <div class="card-grid grid-2" role="list">
+            <div class="card" role="listitem">
+              <h3 class="card-title">급별 구분</h3>
+              <p class="card-desc"><strong>광역 자치 단체</strong></p>
+              <p class="card-sub">특별시 · 광역시 · 특별자치시 · 도 · 특별자치도</p>
+              <hr class="card-hr">
+              <p class="card-desc"><strong>기초 자치 단체</strong></p>
+              <p class="card-sub">시 · 군 · 자치구</p>
+            </div>
+            <div class="card card-accent" role="listitem">
+              <h3 class="card-title">기관별 구분</h3>
+              <p class="card-desc"><strong>의결 기관 — 지방 의회</strong></p>
+              <p class="card-sub">주민의 대표 기관, 최고 의사 결정 기관</p>
+              <hr class="card-hr">
+              <p class="card-desc"><strong>집행 기관 — 지방 자치 단체장</strong></p>
+              <p class="card-sub">지방 자치 단체를 대표하는 집행 기관</p>
+            </div>
+          </div>
+          <div class="highlight-box mt-sm" role="note">
+            <p>✦ 지방 의회(의결)와 지방 자치 단체장(집행)은 <strong>상호 견제와 균형</strong>의 원리로 운영됩니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 8: 사례 — 지방 자치 단체 시각화 ===== -->
+    <div class="slide" data-slide="7"
+         role="region" aria-label="슬라이드 8: 지방 자치 단체 실제 사례">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">02 우리나라의 지방 자치</span>
+          <span class="topbar-title">지방 자치 단체 실제 사례</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 광역 · 기초 자치 단체 사례</h2>
+            <p class="section-subtitle">실제 지역으로 확인하는 두 층위</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+
+          <!-- 계층도 -->
+          <div class="hier-grid" role="list">
+            <!-- 서울 + 종로 -->
+            <div class="hier-col" role="listitem">
+              <div class="hier-region-label">사례 ①</div>
+              <div class="hier-box gwangyeok">
+                서울특별시
+                <div class="hier-box-sub">광역 자치 단체 (특별시)</div>
+              </div>
+              <div class="hier-arrow" aria-hidden="true">↓</div>
+              <div class="hier-box gicho">
+                종로구
+                <div class="hier-box-sub">기초 자치 단체 (자치구)</div>
+              </div>
+            </div>
+            <!-- 부산 + 금정 -->
+            <div class="hier-col" role="listitem">
+              <div class="hier-region-label">사례 ②</div>
+              <div class="hier-box gwangyeok">
+                부산광역시
+                <div class="hier-box-sub">광역 자치 단체 (광역시)</div>
+              </div>
+              <div class="hier-arrow" aria-hidden="true">↓</div>
+              <div class="hier-box gicho">
+                금정구
+                <div class="hier-box-sub">기초 자치 단체 (자치구)</div>
+              </div>
+            </div>
+            <!-- 전북 + 익산 -->
+            <div class="hier-col" role="listitem">
+              <div class="hier-region-label">사례 ③</div>
+              <div class="hier-box gwangyeok">
+                전북특별자치도
+                <div class="hier-box-sub">광역 자치 단체 (특별자치도)</div>
+              </div>
+              <div class="hier-arrow" aria-hidden="true">↓</div>
+              <div class="hier-box gicho">
+                익산시
+                <div class="hier-box-sub">기초 자치 단체 (시)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 하단 2단 -->
+          <div class="case-bottom-grid">
+            <!-- 기관 구성 -->
+            <div class="inst-card" role="complementary" aria-label="기관 구성 예시">
+              <div class="inst-card-title">기관 구성 — 서울특별시 · 종로구</div>
+              <div class="inst-units">
+                <div class="inst-unit">
+                  <div class="inst-unit-name">서울특별시</div>
+                  <div class="inst-unit-sub">
+                    <strong>의결:</strong> 서울시의회<br>
+                    (지역구 의원 + 비례대표 의원)<br>
+                    <strong>집행:</strong> 서울시장
+                  </div>
+                </div>
+                <div class="inst-unit">
+                  <div class="inst-unit-name">종로구</div>
+                  <div class="inst-unit-sub">
+                    <strong>의결:</strong> 종로구의회<br>
+                    (지역구 의원 + 비례대표 의원)<br>
+                    <strong>집행:</strong> 종로구청장
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 주의 사항 -->
+            <div class="warning-card" role="note" aria-label="주의 사항">
+              <div class="warning-card-title">⚠ 주의 — 구라고 모두 기초 자치 단체가 아님!</div>
+              <div class="warning-case">
+                <strong>전북특별자치도 전주시 완산구</strong><br>
+                완산구는 <strong>기초 자치 단체가 아닙니다.</strong><br>
+                전주시(기초 자치 단체)의 일반 행정 구역에 불과합니다.
+              </div>
+              <div class="warning-note">
+                <strong>인구 50만 이상 시의 구</strong> — 특별시·광역시가 아닌 인구 50만 명 이상의 시에도 구(區)가 존재합니다.
+                이러한 구는 <strong>시장이 구청장을 임명</strong>하고 <strong>구의회가 없어</strong> 자치구와 다릅니다.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 9: 지방 자치 단체의 구분 (표) ===== -->
+    <div class="slide" data-slide="8"
+         role="region" aria-label="슬라이드 9: 지방 자치 단체의 구분">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">02 우리나라의 지방 자치</span>
+          <span class="topbar-title">지방 자치 단체의 구분</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 우리나라의 지방 자치 단체</h2>
+            <p class="section-subtitle">(1) 지방 자치 단체의 구분 — 의결 기관과 집행 기관</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+          <div class="mt-sm" style="overflow-x:auto;">
+            <table class="comparison-table table-bordered" role="table" aria-label="지방 자치 단체 구분표">
+              <thead>
+                <tr>
+                  <th scope="col" rowspan="2" style="background:#5C6BC0;vertical-align:middle;">구분</th>
+                  <th scope="col" rowspan="2" style="background:#5C6BC0;vertical-align:middle;">종류</th>
+                  <th scope="col" rowspan="2" style="background:#7986CB;vertical-align:middle;">의결 기관</th>
+                  <th scope="col" colspan="2" style="background:#9575CD;vertical-align:middle;">집행 기관</th>
+                </tr>
+                <tr>
+                  <th scope="col" style="background:#AB47BC;">일반 사무</th>
+                  <th scope="col" style="background:#AB47BC;">교육·학예 사무</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">광역 자치 단체</th>
+                  <td>특별시, 광역시, 특별자치시, 도, 특별자치도</td>
+                  <td><strong>시·도 의회</strong></td>
+                  <td><strong>시장·도지사</strong></td>
+                  <td><strong>교육감</strong></td>
+                </tr>
+                <tr>
+                  <th scope="row">기초 자치 단체</th>
+                  <td>시, 군, 구(자치구)</td>
+                  <td><strong>시·군·구 의회</strong></td>
+                  <td><strong>시장·군수·구청장</strong></td>
+                  <td style="color:var(--style-text-secondary);">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="highlight-box mt-sm" role="note">
+            <p>✦ <strong>교육·학예 사무</strong>는 광역 자치 단체에서만 <strong>교육감</strong>이 별도로 담당합니다. 기초 자치 단체는 교육·학예 사무의 집행 기관을 따로 두지 않습니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 10: 지방 의회 & 지방 자치 단체장 ===== -->
+    <div class="slide" data-slide="9"
+         role="region" aria-label="슬라이드 10: 지방 의회와 지방 자치 단체장">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">02 우리나라의 지방 자치</span>
+          <span class="topbar-title">지방 의회와 지방 자치 단체장</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 지방 의회 vs 지방 자치 단체장</h2>
+            <p class="section-subtitle">지위와 권한 비교</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+          <div class="two-col mt-sm">
+            <div class="col-left">
+              <h3 class="col-title">지방 의회 (의결 기관)</h3>
+              <p class="col-sub-label">지위</p>
+              <ul class="col-list" role="list">
+                <li role="listitem">주민의 <strong>대표 기관</strong></li>
+                <li role="listitem">최고 <strong>의사 결정 기관</strong></li>
+                <li role="listitem">집행 기관의 <strong>견제 및 감시</strong> 기관</li>
+              </ul>
+              <p class="col-sub-label">주요 권한</p>
+              <ul class="col-list" role="list">
+                <li role="listitem"><strong>조례</strong>의 제정과 개정·폐지</li>
+                <li role="listitem">지방 자치 단체 예산의 <strong>심의·확정</strong></li>
+                <li role="listitem">결산의 승인</li>
+                <li role="listitem">지방 행정 사무에 대한 <strong>감사 및 조사</strong></li>
+              </ul>
+            </div>
+            <div class="col-divider" aria-hidden="true"></div>
+            <div class="col-right">
+              <h3 class="col-title accent">지방 자치 단체장 (집행 기관)</h3>
+              <p class="col-sub-label">지위</p>
+              <ul class="col-list accent" role="list">
+                <li role="listitem">지방 자치 단체를 <strong>대표</strong>하는 집행 기관</li>
+              </ul>
+              <p class="col-sub-label">주요 권한</p>
+              <ul class="col-list accent" role="list">
+                <li role="listitem">각종 <strong>행정 사무</strong> 처리</li>
+                <li role="listitem"><strong>규칙</strong> 제정권</li>
+                <li role="listitem">지방 의회 의결에 대한 <strong>재의 요구</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 11: 주민 참여 제도 ===== -->
+    <div class="slide" data-slide="10"
+         role="region" aria-label="슬라이드 11: 주민 참여 제도">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">02 우리나라의 지방 자치</span>
+          <span class="topbar-title">주민 참여 제도</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 주민 참여 제도</h2>
+            <p class="section-subtitle">지방 자치에 주민이 직접 참여할 수 있는 수단</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+          <div class="card-grid grid-2" role="list">
+            <div class="card" role="listitem">
+              <h3 class="card-title">주민 투표제</h3>
+              <p class="card-desc">주민에게 <strong>중대한 영향</strong>을 끼치는 지방 자치 단체의 중요 정책 등을 주민의 투표로 직접 결정하는 제도</p>
+            </div>
+            <div class="card card-accent" role="listitem">
+              <h3 class="card-title">주민 소환제</h3>
+              <p class="card-desc">선출된 지방 공직자를 임기 중에 <strong>주민 투표로 해임</strong>할 수 있는 직접 민주주의적 제도</p>
+            </div>
+            <div class="card" role="listitem">
+              <h3 class="card-title">주민 조례 제정·개폐 청구제</h3>
+              <p class="card-desc">주민이 직접 <strong>조례의 제정·개정·폐지</strong>를 지방 의회에 청구할 수 있는 제도</p>
+            </div>
+            <div class="card card-accent" role="listitem">
+              <h3 class="card-title">주민 참여 예산 제도</h3>
+              <p class="card-desc">지방 자치 단체의 <strong>예산 편성 과정</strong>에 주민이 직접 참여하여 의견을 반영하는 제도</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 12: 현실과 과제 ===== -->
+    <div class="slide" data-slide="11"
+         role="region" aria-label="슬라이드 12: 현실과 과제">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">02 우리나라의 지방 자치</span>
+          <span class="topbar-title">우리나라 지방 자치의 현실과 과제</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 우리나라 지방 자치의 현실과 과제</h2>
+            <p class="section-subtitle">문제점을 파악하고 발전 방향을 모색합니다.</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+          <div class="two-col mt-sm">
+            <div class="col-left">
+              <h3 class="col-title danger">현재 문제점</h3>
+              <ul class="col-list danger" role="list">
+                <li role="listitem">독자적 재원 부족으로 인한 <strong>자치 단체의 자율성 제약</strong></li>
+                <li role="listitem">지역 주민의 <strong>적극적 참여 부족</strong></li>
+                <li role="listitem"><strong>지역 이기주의</strong> 문제 발생 <span style="font-size:0.75em;color:var(--style-text-secondary);">→ 님비·핌피 현상</span></li>
+              </ul>
+            </div>
+            <div class="col-divider" aria-hidden="true"></div>
+            <div class="col-right">
+              <h3 class="col-title accent">발전 과제</h3>
+              <ul class="col-list accent" role="list">
+                <li role="listitem"><strong>지방세 비중 확대</strong> 등 조세 제도 개선</li>
+                <li role="listitem">지방 의회 및 단체장의 <strong>권한 확대</strong></li>
+                <li role="listitem">주민의 <strong>적극적 지방 정치 참여</strong> 촉진</li>
+                <li role="listitem">지역과 사회 전체의 <strong>이익 조화</strong> 고려</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 13: 님비와 핌피 ===== -->
+    <div class="slide" data-slide="12"
+         role="region" aria-label="슬라이드 13: 님비와 핌피 — 지역 이기주의">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">02 우리나라의 지방 자치</span>
+          <span class="topbar-title">지역 이기주의 — 님비와 핌피</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 지역 이기주의 현상</h2>
+            <p class="section-subtitle">지방 자치의 과제 — 님비(NIMBY)와 핌피(PIMFY)</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+          <div class="two-col mt-sm">
+            <div class="col-left">
+              <h3 class="col-title danger">님비 (NIMBY)</h3>
+              <p class="col-sub-label">Not In My Back Yard</p>
+              <p class="col-desc">공익을 위해 필요하지만 <strong>주민에게 불쾌감·불이익</strong>을 주는 시설을 <strong>자기 지역에 설치하는 것을 반대</strong>하는 현상</p>
+              <p class="col-sub-label" style="margin-top:0.4rem;">사례</p>
+              <ul class="col-list danger" role="list">
+                <li role="listitem">쓰레기 매립지 · 소각장</li>
+                <li role="listitem">화장장 · 납골당</li>
+                <li role="listitem">교도소 · 정신 병원</li>
+                <li role="listitem">발전소 · 송전탑</li>
+              </ul>
+            </div>
+            <div class="col-divider" aria-hidden="true"></div>
+            <div class="col-right">
+              <h3 class="col-title accent">핌피 (PIMFY)</h3>
+              <p class="col-sub-label">Please In My Front Yard</p>
+              <p class="col-desc">지역 경제 활성화나 주민 편의에 <strong>도움이 되는 시설</strong>을 <strong>자기 지역에 유치하려는</strong> 현상</p>
+              <p class="col-sub-label" style="margin-top:0.4rem;">사례</p>
+              <ul class="col-list accent" role="list">
+                <li role="listitem">KTX 역사 · 공항</li>
+                <li role="listitem">대형 쇼핑몰 · 혁신 도시</li>
+                <li role="listitem">국립 대학 · 공공 기관</li>
+                <li role="listitem">산업 단지 · 첨단 기업</li>
+              </ul>
+            </div>
+          </div>
+          <div class="highlight-box mt-sm" role="note">
+            <p>✦ 님비·핌피 현상은 <strong>지역과 사회 전체 이익의 조화</strong>를 어렵게 만드는 지방 자치의 핵심 과제입니다. 중앙 정부의 조정과 주민의 공동체 의식이 함께 요구됩니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 14: 핵심 용어 정리 ===== -->
+    <div class="slide" data-slide="13"
+         role="region" aria-label="슬라이드 14: 핵심 용어 정리">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-chapter">핵심 정리</span>
+          <span class="topbar-title">핵심 용어 정리</span>
+        </div>
+        <div class="browser-content" tabindex="-1">
+          <div class="section-header">
+            <h2><span class="section-icon" aria-hidden="true">◆</span> 핵심 용어 정리</h2>
+            <p class="section-subtitle">시험에 반드시 알아야 할 핵심 개념 정리</p>
+          </div>
+          <hr class="section-rule" aria-hidden="true">
+          <ul class="activity-list" role="list">
+            <li class="activity-item" role="listitem">
+              <div class="num-badge" aria-hidden="true">①</div>
+              <div>
+                <h3 class="activity-title">풀뿌리 민주주의</h3>
+                <p class="activity-desc">시민들이 지역 기반의 의사 결정 과정을 거쳐 지역 공동체 운영에 참여하는 민주주의. 지방 자치가 풀뿌리 민주주의 실현에 기여함.</p>
+              </div>
+            </li>
+            <li class="activity-item" role="listitem">
+              <div class="num-badge" aria-hidden="true">②</div>
+              <div>
+                <h3 class="activity-title">조례 vs 규칙</h3>
+                <p class="activity-desc"><strong>조례</strong> — 지방 의회가 법령 범위 내에서 제정하는 자치 법규 &nbsp;|&nbsp; <strong>규칙</strong> — 지방 자치 단체장이 법령·조례가 위임한 범위 내에서 제정</p>
+              </div>
+            </li>
+            <li class="activity-item" role="listitem">
+              <div class="num-badge" aria-hidden="true">③</div>
+              <div>
+                <h3 class="activity-title">수직적 권력 분립</h3>
+                <p class="activity-desc">중앙 정부와 지방 자치 단체 간의 권력 분립. 지방 자치를 통해 권력이 중앙에 집중되는 것을 방지. cf. 수평적 권력 분립: 입법·행정·사법 간 분립</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Slide 15: 마무리 ===== -->
+    <div class="slide" data-slide="14"
+         role="region" aria-label="슬라이드 15: 마무리">
+      <div class="browser-card">
+        <div class="browser-topbar" aria-hidden="true">
+          <span class="topbar-title">마무리 · 정치와 법 · 3. 지방 자치의 이해</span>
+        </div>
+        <div class="browser-content end-slide" tabindex="-1">
+          <h2 class="end-title">수고하셨습니다!</h2>
+          <p class="end-subtitle">질문이 있으신 분은 손을 들어 주세요.</p>
+          <div class="highlight-box end-summary" role="complementary" aria-label="핵심 요약">
+            <span class="hl-label">오늘의 핵심 SUMMARY</span>
+            <ul class="summary-list" role="list">
+              <li role="listitem">✦ 지방 자치의 의의: <strong>풀뿌리 민주주의 실현</strong> + <strong>수직적 권력 분립</strong></li>
+              <li role="listitem">✦ 지방 의회(의결 — 조례·예산 심의) vs 지방 자치 단체장(집행 — 규칙·행정 처리)</li>
+              <li role="listitem">✦ 주민 참여 수단: 투표제 · 소환제 · 조례 청구제 · 참여 예산 제도</li>
+              <li role="listitem">✦ 과제: 재원 자립 강화 · 주민 참여 확대 · 지역 이기주의 극복</li>
+            </ul>
+          </div>
+          <p class="end-footer">교과서 70~76쪽 · 정치와 법 · 2026학년도</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- .presentation -->
+
+  <div id="slideAnnounce" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+  <!-- Navigation -->
+  <nav class="nav-bar" aria-label="슬라이드 네비게이션">
+    <button class="nav-btn" id="prevBtn" disabled aria-label="이전 슬라이드">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+    </button>
+    <span class="nav-counter" aria-label="슬라이드 위치">
+      <input type="text" class="slide-input" id="slideInput" value="1"
+             aria-label="슬라이드 번호 입력 (Enter로 이동)"
+             inputmode="numeric" pattern="[0-9]*">
+      / <span id="totalSlidesDisplay" aria-hidden="true">15</span>
+    </span>
+    <button class="nav-btn" id="nextBtn" aria-label="다음 슬라이드">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+      </svg>
+    </button>
+    <button class="print-btn" id="printBtn" aria-label="PDF로 저장 (인쇄 대화상자 열기)">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/>
+      </svg>
+      PDF
+    </button>
+    <button class="ppt-btn" id="pptBtn" aria-label="PowerPoint(PPTX)로 저장">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zm-2 7.5c-1.93 0-3.5-1.57-3.5-3.5S9.07 9.5 11 9.5c.95 0 1.78.38 2.4.98l-1 1c-.35-.33-.83-.48-1.4-.48-1.1 0-2 .9-2 2s.9 2 2 2c.78 0 1.38-.38 1.72-.94H11v-1.25h3v.25c0 1.93-1.4 3.44-3 3.44z"/>
+      </svg>
+      PPT
+    </button>
+  </nav>
+
+  <script>
+    // ===== Cover Background =====
+    document.querySelectorAll('[data-bg]').forEach(function(el) {
+      el.style.backgroundImage = "url('" + el.dataset.bg + "')";
+    });
+
+    // ===== Navigation =====
+    var slides = document.querySelectorAll('.slide');
+    var totalSlides = slides.length;
+    var currentSlide = 0;
+
+    var progressBar = document.getElementById('progressBar');
+    var prevBtn = document.getElementById('prevBtn');
+    var nextBtn = document.getElementById('nextBtn');
+    var slideInput = document.getElementById('slideInput');
+    var slideAnnounce = document.getElementById('slideAnnounce');
+    var printBtn = document.getElementById('printBtn');
+    if (printBtn) { printBtn.addEventListener('click', function() { window.print(); }); }
+
+    document.getElementById('totalSlidesDisplay').textContent = totalSlides;
+    progressBar.setAttribute('aria-valuemax', totalSlides);
+
+    function announceSlide(current, total) {
+      if (slideAnnounce) slideAnnounce.textContent = '슬라이드 ' + (current + 1) + ' / ' + total;
+    }
+
+    function updateNav() {
+      var pct = ((currentSlide + 1) / totalSlides) * 100;
+      progressBar.style.width = pct + '%';
+      progressBar.setAttribute('aria-valuenow', currentSlide + 1);
+      slideInput.value = currentSlide + 1;
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === totalSlides - 1;
+    }
+
+    function goToSlide(index) {
+      if (index < 0 || index >= totalSlides) return;
+      var cur = slides[currentSlide];
+      var nxt = slides[index];
+      cur.classList.add('will-animate');
+      nxt.classList.add('will-animate');
+      cur.classList.remove('active');
+      currentSlide = index;
+      nxt.classList.add('active');
+      updateNav();
+      announceSlide(currentSlide, totalSlides);
+      setTimeout(function() {
+        cur.classList.remove('will-animate');
+        nxt.classList.remove('will-animate');
+      }, 400);
+      var content = nxt.querySelector('.browser-content');
+      if (content) content.focus();
+    }
+
+    function nextSlide() { goToSlide(currentSlide + 1); }
+    function prevSlide() { goToSlide(currentSlide - 1); }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    document.addEventListener('keydown', function(e) {
+      if (e.target === slideInput) return;
+      if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) {
+        e.preventDefault(); nextSlide();
+      } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) {
+        e.preventDefault(); prevSlide();
+      } else if (e.key === 'Home') { e.preventDefault(); goToSlide(0); }
+      else if (e.key === 'End')   { e.preventDefault(); goToSlide(totalSlides - 1); }
+    });
+
+    var wheelLocked = false;
+    document.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      if (wheelLocked) return;
+      wheelLocked = true;
+      if (e.deltaY > 0) nextSlide();
+      else if (e.deltaY < 0) prevSlide();
+      setTimeout(function() { wheelLocked = false; }, 600);
+    }, { passive: false });
+
+    var touchStartX = 0, touchStartY = 0;
+    document.addEventListener('touchstart', function(e) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    document.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      var dy = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+        if (dx < 0) nextSlide(); else prevSlide();
+      }
+    }, { passive: true });
+
+    slideInput.addEventListener('focus', function() { slideInput.select(); });
+    slideInput.addEventListener('keydown', function(e) {
+      e.stopPropagation();
+      if (e.key === 'Enter') {
+        var n = parseInt(slideInput.value, 10);
+        if (!isNaN(n) && n >= 1 && n <= totalSlides) goToSlide(n - 1);
+        else slideInput.value = currentSlide + 1;
+        slideInput.blur();
+      } else if (e.key === 'Escape') {
+        slideInput.value = currentSlide + 1;
+        slideInput.blur();
+      }
+    });
+    slideInput.addEventListener('blur', function() {
+      var n = parseInt(slideInput.value, 10);
+      if (!isNaN(n) && n >= 1 && n <= totalSlides) goToSlide(n - 1);
+      else slideInput.value = currentSlide + 1;
+    });
+
+    updateNav();
+
+    // ===== PDF Print Button =====
+    var printBtn = document.getElementById('printBtn');
+    if (printBtn) {
+      printBtn.addEventListener('click', function() { window.print(); });
+    }
+
+    // ===== PPT Export (html2canvas + PptxGenJS) =====
+    (function() {
+      var pptBtn = document.getElementById('pptBtn');
+      if (!pptBtn) return;
+
+      function loadScript(src) {
+        return new Promise(function(resolve, reject) {
+          if (document.querySelector('script[src="' + src + '"]')) { resolve(); return; }
+          var s = document.createElement('script');
+          s.src = src;
+          s.onload = resolve;
+          s.onerror = function() { reject(new Error(src)); };
+          document.head.appendChild(s);
+        });
+      }
+
+      // 여러 CDN을 순서대로 시도
+      function loadScriptFallback(urls) {
+        return urls.reduce(function(p, url) {
+          return p.catch(function() { return loadScript(url); });
+        }, Promise.reject());
+      }
+
+      var H2C_URLS = [
+        'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',
+        'https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js'
+      ];
+      var PPTX_URLS = [
+        'https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js',
+        'https://unpkg.com/pptxgenjs@3.12.0/dist/pptxgen.bundle.js'
+      ];
+
+      function resetBtn() {
+        pptBtn.disabled = false;
+        pptBtn.innerHTML =
+          '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"' +
+          ' style="width:0.7rem;height:0.7rem;fill:currentColor;flex-shrink:0">' +
+          '<path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z' +
+          'm-1 7V3.5L18.5 9H13z"/></svg>PPT';
+      }
+
+      pptBtn.addEventListener('click', async function() {
+        pptBtn.disabled = true;
+        pptBtn.textContent = '로딩중…';
+
+        // 애니메이션 비활성화 스타일
+        var noAnimStyle = document.createElement('style');
+        noAnimStyle.id = 'ppt-no-anim';
+        noAnimStyle.textContent =
+          '.slide{animation:none!important;transition:none!important;}';
+        document.head.appendChild(noAnimStyle);
+
+        var savedIdx = currentSlide;
+        var allSlides = document.querySelectorAll('.slide');
+        var total = allSlides.length;
+        var pArea = document.getElementById('presentation');
+
+        try {
+          // ① 라이브러리 로드 (CDN 순서대로 시도)
+          pptBtn.textContent = 'html2canvas 로딩…';
+          await loadScriptFallback(H2C_URLS);
+
+          pptBtn.textContent = 'PptxGenJS 로딩…';
+          await loadScriptFallback(PPTX_URLS);
+
+          // ② 생성자 확인
+          var PptxCtor = (typeof pptxgen !== 'undefined') ? pptxgen
+                       : (typeof PptxGenJS !== 'undefined') ? PptxGenJS
+                       : null;
+          if (!PptxCtor) throw new Error('PptxGenJS 생성자 없음');
+
+          var pptx = new PptxCtor();
+          pptx.layout = 'LAYOUT_16x9';
+
+          // ③ 슬라이드별 캡처
+          for (var i = 0; i < total; i++) {
+            pptBtn.textContent = (i + 1) + ' / ' + total + ' 캡처중…';
+
+            allSlides.forEach(function(s, idx) {
+              s.classList.toggle('active', idx === i);
+            });
+            await new Promise(function(r) { setTimeout(r, 400); });
+
+            // CORS 이미지가 tainted canvas를 만들지 않도록:
+            // useCORS:true 로 요청, allowTaint:false 유지
+            var canvas = await html2canvas(pArea, {
+              scale: 2,
+              useCORS: true,
+              allowTaint: false,
+              logging: false,
+              backgroundColor: '#ECEFF1',
+              ignoreElements: function(el) {
+                // 외부 이미지가 taint 유발 시 해당 img 태그만 건너뜀
+                if (el.tagName === 'IMG' && el.src &&
+                    !el.src.startsWith(location.origin) &&
+                    el.crossOrigin !== 'anonymous') {
+                  el.crossOrigin = 'anonymous';
+                }
+                return false;
+              }
+            });
+
+            var imgData;
+            try {
+              imgData = canvas.toDataURL('image/jpeg', 0.93);
+            } catch (taintErr) {
+              // tainted canvas → 흰 배경으로 재시도
+              var fallback = document.createElement('canvas');
+              fallback.width = canvas.width; fallback.height = canvas.height;
+              var ctx = fallback.getContext('2d');
+              ctx.fillStyle = '#ECEFF1'; ctx.fillRect(0, 0, fallback.width, fallback.height);
+              ctx.drawImage(canvas, 0, 0);
+              imgData = fallback.toDataURL('image/jpeg', 0.93);
+            }
+
+            var slide = pptx.addSlide();
+            slide.addImage({ data: imgData, x: 0, y: 0, w: '100%', h: '100%' });
+          }
+
+          // ④ 복원
+          document.getElementById('ppt-no-anim').remove();
+          goToSlide(savedIdx);
+
+          // ⑤ 저장
+          pptBtn.textContent = '저장중…';
+          await pptx.writeFile({ fileName: '지방자치의의의.pptx' });
+
+          pptBtn.textContent = '저장 완료!';
+          setTimeout(resetBtn, 2500);
+
+        } catch (err) {
+          console.error('[PPT 내보내기]', err.message || err);
+          var noAnimEl = document.getElementById('ppt-no-anim');
+          if (noAnimEl) noAnimEl.remove();
+          goToSlide(savedIdx);
+          var msg = err.message || '';
+          if (msg.indexOf('cdn.jsdelivr') !== -1 || msg.indexOf('unpkg') !== -1) {
+            pptBtn.textContent = '인터넷 연결 필요';
+          } else {
+            pptBtn.textContent = '오류 (F12 확인)';
+          }
+          setTimeout(resetBtn, 3500);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
